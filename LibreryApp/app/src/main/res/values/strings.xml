@@ -3,5 +3,6 @@
     <string name="tab_text_0">Read</string>
     <string name="tab_text_1">To read</string>
     <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="book_title">Title: </string>
+    <string name="book_author">Author: </string>
 </resources>
