@@ -5,4 +5,5 @@
     <string name="action_settings">Settings</string>
     <string name="book_title">Title: </string>
     <string name="book_author">Author: </string>
+    <string name="isbn_button">Search by ISBN</string>
 </resources>
