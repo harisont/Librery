@@ -5,5 +5,12 @@
     <string name="action_settings">Settings</string>
     <string name="book_title">Title: </string>
     <string name="book_author">Author: </string>
-    <string name="isbn_button">Search by ISBN</string>
+    <string name="search">Advanced search</string>
+    <string name="search_butt">Search</string>
+    <string name="hint_isbn">ISBN</string>
+    <!--hints-->
+    <string name="hint_title">Title</string>
+    <string name="hint_author">Author</string>
+    <string name="hint_publisher">Publisher</string>
+    <string name="hint_year">Year</string>
 </resources>
