@@ -1,5 +1,7 @@
 package com.example.harisont.librery
 
+import android.content.Intent
+import android.support.design.widget.TabLayout
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 
@@ -41,9 +43,11 @@ class MainActivity : AppCompatActivity() {
         // Set up the ViewPager with the sections adapter.
         container.adapter = mSectionsPagerAdapter
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
+        tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
+
+        fab.setOnClickListener {
+            startActivity(Intent(this, SearchActivity::class.java))
         }
 
     }
@@ -82,8 +86,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun getCount(): Int {
-            // Show 3 total pages.
-            return 3
+            // Show 2 total pages.
+            return 2
         }
     }
 
@@ -94,9 +98,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                   savedInstanceState: Bundle?): View? {
-            val rootView = inflater.inflate(R.layout.fragment_main, container, false)
-            rootView.section_label.text = getString(R.string.section_format, arguments?.getInt(ARG_SECTION_NUMBER))
-            return rootView
+            return inflater.inflate(R.layout.fragment_main, container, false)
         }
 
         companion object {
