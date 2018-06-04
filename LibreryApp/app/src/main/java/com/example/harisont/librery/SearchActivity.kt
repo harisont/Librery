@@ -4,6 +4,8 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_search.*
+import okhttp3.*
+import java.io.IOException
 
 class SearchActivity : AppCompatActivity() {
 
@@ -11,10 +13,22 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        // TODO: replace with server call
         search_button.setOnClickListener {
-            startActivity(Intent(this, ViewBookDetailsActivity::class.java))
+            fetchJSON()
         }
     }
 
+    fun fetchJSON() {
+        val url = "https://www.googleapis.com/books/v1/volumes/zyTCAlFPjgYC"
+        val client = OkHttpClient()
+        val req = Request.Builder().url(url).build()
+        client.newCall(req).enqueue(object: Callback {
+            override fun onResponse(call: Call?, response: Response?) {
+                println("Works like a charm!")
+            }
+            override fun onFailure(call: Call?, e: IOException?) {
+                println("Epic fail!")
+            }
+        })
+    }
 }
