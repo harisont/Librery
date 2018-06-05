@@ -22,7 +22,7 @@ class SearchActivity : AppCompatActivity() {
         val url = "https://www.googleapis.com/books/v1/volumes/zyTCAlFPjgYC"
         val client = OkHttpClient()
         val req = Request.Builder().url(url).build()
-        client.newCall(req).enqueue(object: Callback {
+        client.newCall(req).enqueue(object: Callback {  // cannot use .execute() in the UI thread
             override fun onResponse(call: Call?, response: Response?) {
                 println("Works like a charm!")
             }
