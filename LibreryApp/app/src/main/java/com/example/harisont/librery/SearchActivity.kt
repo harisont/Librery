@@ -37,14 +37,14 @@ class SearchActivity : AppCompatActivity() {
         })
     }
 
-    private fun advancedSearch(isbn: String?, intitle: String?, inauthor: String?, inpublisher: String?) {
+    private fun advancedSearch(isbnCode: String, title: String, author: String, publisher: String) {
         //val apiKey = "AIzaSyDWQIKMYe6760oFGDbNli8lBVt6IYxga7g"
-        val url = "https://www.googleapis.com/books/v1/volumes/?q=" +
-                "isbn:$isbn" +
-                "+intitle:$intitle" +
-                "+inauthor:$inauthor" +
-                "+inpublisher:$inpublisher"
-        print(url)
+        val isbn = if (isbnCode != "") "isbn:$isbnCode" else ""
+        val intitle = if (title != "") "intitle:$title" else ""
+        val inauthor = if (author != "") "inauthor:$author" else ""
+        val inpublisher = if (publisher != "") "inpublisher:$publisher" else ""
+        val url = "https://www.googleapis.com/books/v1/volumes/?q=$isbn+$intitle+$inauthor+$inpublisher"
+        println(url)
         fetchBooks(url)
     }
 }
