@@ -13,7 +13,6 @@
     <string name="hint_title">Title</string>
     <string name="hint_author">Author</string>
     <string name="hint_publisher">Publisher</string>
-    <string name="hint_year">Year</string>
-    <string name="notes_hint">Rewiew or notes</string>
+    <string name="notes_hint">Review or notes</string>
 
 </resources>
