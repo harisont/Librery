@@ -14,16 +14,18 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         search_button.setOnClickListener {
-            fetchJSON()
+            advancedSearch(null, null, null, null)
         }
     }
 
-    fun fetchJSON() {
+    private fun advancedSearch(isbn: String?, intitle: String?, inauthor: String?, inpublisher: String?) {
         val url = "https://www.googleapis.com/books/v1/volumes/zyTCAlFPjgYC"
         val client = OkHttpClient()
         val req = Request.Builder().url(url).build()
         client.newCall(req).enqueue(object: Callback {  // cannot use .execute() in the UI thread
             override fun onResponse(call: Call?, response: Response?) {
+                val body = response?.body()?.string()
+                // println(body)
                 println("Works like a charm!")
             }
             override fun onFailure(call: Call?, e: IOException?) {
