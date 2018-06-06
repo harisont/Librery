@@ -55,6 +55,6 @@ class SearchActivity : AppCompatActivity() {
 
 class SearchResults(val items: List<Book>)
 
-// TODO: edit class fields
+// TODO: edit class fields (subclasses when needed)
 class Book(val id: String)
 
