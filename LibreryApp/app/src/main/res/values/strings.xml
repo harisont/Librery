@@ -9,6 +9,7 @@
     <string name="search_butt">Search</string>
     <string name="hint_isbn">ISBN</string>
     <string name="cover_desc">Cover image</string>
+    <string name="pub_button">Suggest book</string>
     <!--hints-->
     <string name="hint_title">Title</string>
     <string name="hint_author">Author</string>

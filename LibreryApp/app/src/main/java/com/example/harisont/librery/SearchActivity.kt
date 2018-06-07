@@ -11,7 +11,6 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        // TODO: replace with server call
         search_button.setOnClickListener {
             startActivity(Intent(this, ViewBookDetailsActivity::class.java))
         }
