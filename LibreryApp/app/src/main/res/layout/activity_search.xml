@@ -24,7 +24,7 @@
         android:layout_height="wrap_content">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/isbn"
+            android:id="@+id/search_by_isbn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_isbn"
