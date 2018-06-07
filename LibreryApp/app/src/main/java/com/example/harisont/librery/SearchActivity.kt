@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_search.*
 import okhttp3.*
 import java.io.IOException
-import java.time.Year
+
 
 class SearchActivity : AppCompatActivity() {
 
@@ -50,11 +50,12 @@ class SearchActivity : AppCompatActivity() {
                 "&projection=lite"
         fetchBooks(url)
     }
-
 }
 
 class SearchResults(val items: List<Book>)
 
-// TODO: edit class fields (subclasses when needed)
-class Book(val id: String)
+class Book(val id: String, val volumeInfo: VolumeInfo)
 
+class VolumeInfo(val title: String, val authors: List<String>, val publisher: String, val publishedDate: String, val imageLinks:ImageLinks)
+
+class ImageLinks(val smallThumbnail: String)
