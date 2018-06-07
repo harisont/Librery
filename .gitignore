@@ -89,6 +89,9 @@ fastlane/readme.md
 *.mtc1
 *.out
 *.synctex.gz
+*.pdf
+*.nav
+*.snm
 
 # My own files
 API_key

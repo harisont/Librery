@@ -1,0 +1,47 @@
+% !TeX spellcheck = IT
+\documentclass[a4paper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{float} %per posizione assoluta delle immagini [H]
+\usepackage[colorlinks=true,linkcolor=blue]{hyperref}
+\usepackage{nameref} 
+\usepackage{siunitx} 
+\usepackage[top=0.7in, bottom=0.7in, left=0.7in, right=1.6in]{geometry} %margini
+\setcounter{section}{-1} %per numerare le sezioni partendo da 0
+
+\graphicspath{{./images/}}
+
+%defines-----------------------------------
+\def\code#1{\texttt{#1}}
+\def\sec#1{\section{#1}\label{#1}} 
+\def\sub#1{\subsection{#1}\label{#1}} 
+\def\subsub#1{\subsubsection{#1}\label{#1}} 
+\def\para#1{\paragraph{#1}\label{#1}}
+\def\vedi#1{\nameref{#1}} 
+\def\italic#1{\textit{#1}}
+\def\image[#1][#2]#3{
+  \begin{figure}[H]
+  \centering
+  \includegraphics[#2]{#1}
+  \caption{#3}
+  \end{figure}}
+\def\boximage[#1][#2]#3{
+  \begin{figure}[H]
+  \centering
+  \fbox{\includegraphics[#2]{#1}}
+  \caption{#3}
+  \end{figure}}
+\def\footurl[#1]#2{\href{#2}{#1}\footnote{\url{#2}}}
+%------------------------------------------
+
+\title{Librery}
+\author{Arianna Masciolini}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+
+\end{document}
