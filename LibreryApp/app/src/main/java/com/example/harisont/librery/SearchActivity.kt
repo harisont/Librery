@@ -7,7 +7,6 @@ import kotlinx.android.synthetic.main.activity_search.*
 import okhttp3.*
 import java.io.IOException
 
-
 class SearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
