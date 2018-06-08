@@ -1,5 +1,6 @@
 package com.example.harisont.librery
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.google.gson.GsonBuilder
@@ -37,6 +38,9 @@ class SearchActivity : AppCompatActivity() {
                 println("Epic fail!")
             }
         })
+        search_button.setOnClickListener {
+            startActivity(Intent(this, SearchResultsActivity::class.java))
+        }
     }
 
     private fun advancedSearch(isbnCode: String, title: String, author: String, publisher: String) {
