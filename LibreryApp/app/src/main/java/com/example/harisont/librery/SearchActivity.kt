@@ -1,9 +1,11 @@
 package com.example.harisont.librery
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import okhttp3.*
 import java.io.IOException
 
@@ -31,11 +33,16 @@ class SearchActivity : AppCompatActivity() {
                 println("Works like a charm!")
                 val gson = GsonBuilder().create()
                 val searchResults = gson.fromJson(json, SearchResults::class.java)
+                recycler_view.adapter = RecyclerViewAdapter(searchResults)
+
             }
             override fun onFailure(call: Call?, e: IOException?) {
                 println("Epic fail!")
             }
         })
+        search_button.setOnClickListener {
+            startActivity(Intent(this, SearchResultsActivity::class.java))
+        }
     }
 
     private fun advancedSearch(isbnCode: String, title: String, author: String, publisher: String) {
@@ -51,7 +58,7 @@ class SearchActivity : AppCompatActivity() {
     }
 }
 
-class SearchResults(val items: List<Book>)
+class SearchResults(val books: List<Book>)
 
 class Book(val id: String, val volumeInfo: VolumeInfo)
 
