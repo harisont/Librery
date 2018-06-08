@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.row.view.*
 class RecyclerViewAdapter(val BookList: SearchResults): RecyclerView.Adapter<CustomViewHolder>() {
 
     override fun getItemCount(): Int {
-        return BookList.books.count()
+        return BookList.items.count()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {

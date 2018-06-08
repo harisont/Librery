@@ -33,16 +33,16 @@ class SearchActivity : AppCompatActivity() {
                 println("Works like a charm!")
                 val gson = GsonBuilder().create()
                 val searchResults = gson.fromJson(json, SearchResults::class.java)
-                recycler_view.adapter = RecyclerViewAdapter(searchResults)
-
+                runOnUiThread {
+                    startActivity(Intent(this@SearchActivity, SearchResultsActivity::class.java))
+                    recycler_view.adapter = RecyclerViewAdapter(searchResults)
+                }
             }
             override fun onFailure(call: Call?, e: IOException?) {
                 println("Epic fail!")
             }
         })
-        search_button.setOnClickListener {
-            startActivity(Intent(this, SearchResultsActivity::class.java))
-        }
+        startActivity(Intent(this, SearchResultsActivity::class.java))
     }
 
     private fun advancedSearch(isbnCode: String, title: String, author: String, publisher: String) {
@@ -58,7 +58,7 @@ class SearchActivity : AppCompatActivity() {
     }
 }
 
-class SearchResults(val books: List<Book>)
+class SearchResults(val items: List<Book>)
 
 class Book(val id: String, val volumeInfo: VolumeInfo)
 
