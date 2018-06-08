@@ -12,6 +12,5 @@ class SearchResultsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_main)
         recycler_view.layoutManager =LinearLayoutManager(this)
-        recycler_view.adapter = RecyclerViewAdapter()
     }
 }

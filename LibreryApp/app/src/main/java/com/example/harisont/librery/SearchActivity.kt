@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import okhttp3.*
 import java.io.IOException
 import java.time.Year
@@ -33,6 +34,8 @@ class SearchActivity : AppCompatActivity() {
                 println("Works like a charm!")
                 val gson = GsonBuilder().create()
                 val searchResults = gson.fromJson(json, SearchResults::class.java)
+                recycler_view.adapter = RecyclerViewAdapter(searchResults)
+
             }
             override fun onFailure(call: Call?, e: IOException?) {
                 println("Epic fail!")
@@ -57,7 +60,7 @@ class SearchActivity : AppCompatActivity() {
 
 }
 
-class SearchResults(val items: List<Book>)
+class SearchResults(val books: List<Book>)
 
 // TODO: edit class fields
 class Book(val id: String)
