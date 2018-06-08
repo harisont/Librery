@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.row.view.*
 
 class RecyclerViewAdapter: RecyclerView.Adapter<CustomViewHolder>() {
 
@@ -18,10 +19,12 @@ class RecyclerViewAdapter: RecyclerView.Adapter<CustomViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-
+        holder?.v?.title?.text = "Title"
+        holder?.v?.author?.text = "Author"
+        holder?.v?.cover?.setImageResource(R.drawable.sample_cover)
     }
 }
 
-class CustomViewHolder(v: View): RecyclerView.ViewHolder(v) {
+class CustomViewHolder(val v: View): RecyclerView.ViewHolder(v) {
 
 }
