@@ -36,16 +36,6 @@ class SearchActivity : AppCompatActivity() {
                 println("Works like a charm!")
                 val gson = GsonBuilder().create()
                 val searchResults = gson.fromJson(json, SearchResults::class.java)
-                /*runOnUiThread {
-                    startActivity(Intent(
-                        this@SearchActivity,
-                        SearchResultsActivity::class.java).putExtra("res", searchResults))
-                }*/
-                val intent = Intent(this@SearchActivity, SearchResultsActivity::class.java)
-                var bundle = Bundle()
-                bundle.putParcelable("res",searchResults)
-                intent.putExtra("resBundle",bundle)
-                startActivity(intent)
             }
             override fun onFailure(call: Call?, e: IOException?) {
                 println("Epic fail!")
@@ -67,21 +57,15 @@ class SearchActivity : AppCompatActivity() {
     }
 }
 
-@Parcelize
-/* Parcelable is implemented to allow SearchResults objects to be passed to other activities via Intent;
- * the @Parcelize annotation auto-generates writeToParcel() and createToParcel() */
-class SearchResults(val items: List<Book>): Parcelable
+class SearchResults(val items: List<Book>)
 
-@Parcelize
 class Book(val id: String,
-           val volumeInfo: VolumeInfo): Parcelable
+           val volumeInfo: VolumeInfo)
 
-@Parcelize
 class VolumeInfo(val title: String,
                  val authors: List<String>,
                  val publisher: String,
                  val publishedDate: String,
-                 val imageLinks:ImageLinks): Parcelable
+                 val imageLinks:ImageLinks)
 
-@Parcelize
-class ImageLinks(val smallThumbnail: String): Parcelable
+class ImageLinks(val smallThumbnail: String)

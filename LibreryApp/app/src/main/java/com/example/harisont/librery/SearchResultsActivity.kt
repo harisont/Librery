@@ -11,9 +11,5 @@ class SearchResultsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_main)
         recycler_view.layoutManager = LinearLayoutManager(this)
-        val bundle = intent.getBundleExtra("resBundle")
-        //var searchResults  = bundle.getParcelable<SearchResults>("res") as SearchResults
-        //println(searchResults)
-        //recycler_view.adapter = RecyclerViewAdapter(searchResults)
     }
 }
