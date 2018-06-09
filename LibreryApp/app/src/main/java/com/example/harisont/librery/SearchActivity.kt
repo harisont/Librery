@@ -3,7 +3,10 @@ package com.example.harisont.librery
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import com.google.gson.GsonBuilder
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import okhttp3.*
@@ -33,16 +36,22 @@ class SearchActivity : AppCompatActivity() {
                 println("Works like a charm!")
                 val gson = GsonBuilder().create()
                 val searchResults = gson.fromJson(json, SearchResults::class.java)
-                runOnUiThread {
-                    startActivity(Intent(this@SearchActivity, SearchResultsActivity::class.java))
-                    recycler_view.adapter = RecyclerViewAdapter(searchResults)
-                }
+                /*runOnUiThread {
+                    startActivity(Intent(
+                        this@SearchActivity,
+                        SearchResultsActivity::class.java).putExtra("res", searchResults))
+                }*/
+                val intent = Intent(this@SearchActivity, SearchResultsActivity::class.java)
+                var bundle = Bundle()
+                bundle.putParcelable("res",searchResults)
+                intent.putExtra("resBundle",bundle)
+                startActivity(intent)
             }
             override fun onFailure(call: Call?, e: IOException?) {
                 println("Epic fail!")
             }
         })
-        startActivity(Intent(this, SearchResultsActivity::class.java))
+        //startActivity(Intent(this, SearchResultsActivity::class.java))
     }
 
     private fun advancedSearch(isbnCode: String, title: String, author: String, publisher: String) {
@@ -58,10 +67,21 @@ class SearchActivity : AppCompatActivity() {
     }
 }
 
-class SearchResults(val items: List<Book>)
+@Parcelize
+/* Parcelable is implemented to allow SearchResults objects to be passed to other activities via Intent;
+ * the @Parcelize annotation auto-generates writeToParcel() and createToParcel() */
+class SearchResults(val items: List<Book>): Parcelable
 
-class Book(val id: String, val volumeInfo: VolumeInfo)
+@Parcelize
+class Book(val id: String,
+           val volumeInfo: VolumeInfo): Parcelable
 
-class VolumeInfo(val title: String, val authors: List<String>, val publisher: String, val publishedDate: String, val imageLinks:ImageLinks)
+@Parcelize
+class VolumeInfo(val title: String,
+                 val authors: List<String>,
+                 val publisher: String,
+                 val publishedDate: String,
+                 val imageLinks:ImageLinks): Parcelable
 
-class ImageLinks(val smallThumbnail: String)
+@Parcelize
+class ImageLinks(val smallThumbnail: String): Parcelable
