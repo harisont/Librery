@@ -22,39 +22,40 @@
 
             <ImageView
                 android:id="@+id/book_cover"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_launcher_background"
-                android:contentDescription="@string/cover_desc" /> <!--TODO: remove-->
+                android:contentDescription="@string/cover_desc"
+                android:src="@drawable/sample_cover" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_vertical_margin">
 
                 <TextView
                     android:id="@+id/book_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Un libro qualunque" />    <!--TODO: remove-->
+                    android:textColor="@color/colorAccent"
+                    android:text="Un libro qualunque" />
 
                 <TextView
                     android:id="@+id/book_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Barbabulba" />  <!--TODO: remove-->
+                    android:text="Barbabulba" />
 
                 <TextView
                     android:id="@+id/book_publisher"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Edizioni Qualsiasi" />  <!--TODO: remove-->
-
+                    android:text="Edizioni Qualsiasi" />
                 <TextView
                     android:id="@+id/book_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2048" />  <!--TODO: remove-->
+                    android:text="2048" />
 
             </LinearLayout>
 
