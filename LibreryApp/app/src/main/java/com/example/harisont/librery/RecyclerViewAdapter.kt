@@ -19,8 +19,12 @@ class RecyclerViewAdapter(val BookList: SearchResults): RecyclerView.Adapter<Cus
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder?.v?.title?.text = "Title"
-        holder?.v?.author?.text = "Author"
+        val title = BookList.items[position].volumeInfo.title
+        val authorList: List<String>?
+        authorList = BookList.items[position].volumeInfo.authors
+        val authors = if (authorList != null) authorList.joinToString() else ""
+        holder?.v?.title?.text = title
+        holder?.v?.author?.text = authors
         holder?.v?.cover?.setImageResource(R.drawable.sample_cover)
     }
 }
