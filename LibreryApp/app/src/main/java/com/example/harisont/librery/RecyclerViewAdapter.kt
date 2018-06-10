@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row.view.*
 
 class RecyclerViewAdapter(val BookList: SearchResults): RecyclerView.Adapter<CustomViewHolder>() {
@@ -19,10 +20,14 @@ class RecyclerViewAdapter(val BookList: SearchResults): RecyclerView.Adapter<Cus
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val title = BookList.items[position].volumeInfo.title
+        val book = BookList.items[position]
+        val title = book.volumeInfo.title
         val authorList: List<String>?
-        authorList = BookList.items[position].volumeInfo.authors
-        val authors = if (authorList != null) authorList.joinToString() else ""
+        authorList = book.volumeInfo.authors
+        val authors = authorList?.joinToString()    // kotlin magic to just join to string if not null
+        val coverThumb = book.volumeInfo.imageLinks.smallThumbnail
+        val coverView = holder?.v?.cover
+        Picasso.get().load(coverThumb).into(coverView);
         holder?.v?.title?.text = title
         holder?.v?.author?.text = authors
         holder?.v?.cover?.setImageResource(R.drawable.sample_cover)
