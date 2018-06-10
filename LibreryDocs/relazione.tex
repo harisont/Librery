@@ -1,0 +1,71 @@
+% !TeX spellcheck = IT
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{float} %per posizione assoluta delle immagini [H]
+\usepackage[colorlinks=true,linkcolor=blue]{hyperref}
+\usepackage{nameref} 
+
+\graphicspath{{./images/}}
+
+%defines-----------------------------------
+\def\code#1{\texttt{#1}}
+\def\sec#1{\section{#1}\label{#1}} 
+\def\sub#1{\subsection{#1}\label{#1}} 
+\def\subsub#1{\subsubsection{#1}\label{#1}} 
+\def\para#1{\paragraph{#1}\label{#1}}
+\def\vedi#1{\nameref{#1}} 
+\def\italic#1{\textit{#1}}
+\def\image[#1][#2]#3{
+  \begin{figure}[H]
+  \centering
+  \includegraphics[#2]{#1}
+  \caption{#3}
+  \end{figure}}
+\def\boximage[#1][#2]#3{
+  \begin{figure}[H]
+  \centering
+  \fbox{\includegraphics[#2]{#1}}
+  \caption{#3}
+  \end{figure}}
+\def\footurl[#1]#2{\href{#2}{#1}\footnote{\url{#2}}}
+%------------------------------------------
+
+\title{Librery: un'app per la gestione e la condivisione delle proprie letture}
+\author{Arianna Masciolini}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Introduzione}
+Librery è un'applicazione Android completamente libera ed open source volta alla gestione delle proprie letture. Essa permette di effettuare ricerche nel più grande indice di testi integrali esistente tramite le API RESTful di Google Libri e di salvare localmente i dati relativi ai libri letti o che s'intende leggere. L'utente può aggiungere delle annotazioni e la propria valutazione ai libri letti e, grazie ad un servizio web anch'esso realizzato nell'ambito del progetto Librery, mantenere un proprio "scaffale" pubblico online volto a condividere con altri bibliofili i propri libri preferiti.
+	\subsection{Casi d'uso}
+	Tutte le sopra citate funzionalità sono presenti in Google Libri, che è ormai non solo un motore di ricerca specializzato, ma un servizio web complesso e articolato collegato agli account Google dei propri utenti. \newline
+	Librery, che effettua solamente richieste di dati pubblici a Google Libri e che dunque non necessita affatto un account Google, vuole proporsi come una più semplice ma valida alternativa per quanti preferiscono avere la possibilità di mantenere un certo grado di riservatezza sui propri dati personali, eventualmente indicando in modo esplicito i dati di quali volumi vadano pubblicati online.
+\newpage
+\section{Architettura}
+L'architettura di Librery è piuttosto semplice, ma inusuale. 
+Il dispositivo Android è client di due diversi server, uno di Google, al quale vengono effettuate le richieste JSON nel momento in cui si fa una ricerca, l'altro realizzato nell'ambito del progetto Librery, volto a gestire le collezioni pubbliche di libri dei diversi utenti, cui l'app invia parte dei dati salvati nel proprio database locale.
+\image[diagram.png][scale=0.7]{Architettura del progetto Librery}
+Nelle sezioni successive verranno descritti approfonditamente il client ed il server Librery online.
+\newpage
+\section{Il client: l'app Android}
+In questa sezione si è scelto di concentrare l'attenzione sugli aspetti del client realizzato che hanno a che vedere con l'uso delle API di Google Libri e, più in generale, con i vari aspetti del networking, accennando solo in maniera molto breve alle soluzioni proposte per quel che riguarda la realizzazione dell'interfaccia grafica e del database locale.
+	\subsection{Visione d'insieme}
+	% Kotlin
+	% activity (con screnshoot di ricerca e risultati di ricerca)
+	% room persistence database
+	\subsection{Utilizzo delle API di Google Books}
+	\subsection{Librerie}
+		\subsubsection{OkHTTP}
+		\subsubsection{Gson}
+		\subsubsection{Picasso}
+
+\newpage
+\section{Il server per la condivisione online del proprio scaffale}
+
+\end{document}
