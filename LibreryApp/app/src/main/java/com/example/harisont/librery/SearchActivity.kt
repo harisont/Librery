@@ -3,7 +3,10 @@ package com.example.harisont.librery
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import com.google.gson.GsonBuilder
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import okhttp3.*
@@ -31,18 +34,13 @@ class SearchActivity : AppCompatActivity() {
             override fun onResponse(call: Call?, response: Response?) {
                 val json = response?.body()?.string()
                 println("Works like a charm!")
-                val gson = GsonBuilder().create()
-                val searchResults = gson.fromJson(json, SearchResults::class.java)
-                recycler_view.adapter = RecyclerViewAdapter(searchResults)
-
+                startActivity(Intent(this@SearchActivity, SearchResultsActivity::class.java)
+                        .putExtra("res", json))     // search results are sent to the new activity as JSON
             }
             override fun onFailure(call: Call?, e: IOException?) {
                 println("Epic fail!")
             }
         })
-        search_button.setOnClickListener {
-            startActivity(Intent(this, SearchResultsActivity::class.java))
-        }
     }
 
     private fun advancedSearch(isbnCode: String, title: String, author: String, publisher: String) {
@@ -57,11 +55,3 @@ class SearchActivity : AppCompatActivity() {
         fetchBooks(url)
     }
 }
-
-class SearchResults(val books: List<Book>)
-
-class Book(val id: String, val volumeInfo: VolumeInfo)
-
-class VolumeInfo(val title: String, val authors: List<String>, val publisher: String, val publishedDate: String, val imageLinks:ImageLinks)
-
-class ImageLinks(val smallThumbnail: String)
