@@ -22,7 +22,8 @@ class RecyclerViewAdapter(val BookList: SearchResults): RecyclerView.Adapter<Cus
         val title = BookList.items[position].volumeInfo.title
         val authorList: List<String>?
         authorList = BookList.items[position].volumeInfo.authors
-        val authors = if (authorList != null) authorList.joinToString() else ""
+        val authors = authorList?.joinToString()    // kotlin magic to just join to string if not null
+        // TODO: deal with images
         holder?.v?.title?.text = title
         holder?.v?.author?.text = authors
         holder?.v?.cover?.setImageResource(R.drawable.sample_cover)
