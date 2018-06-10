@@ -36,14 +36,11 @@ class SearchActivity : AppCompatActivity() {
                 println("Works like a charm!")
                 startActivity(Intent(this@SearchActivity, SearchResultsActivity::class.java)
                         .putExtra("res", json))     // search results are sent to the new activity as JSON
-                val gson = GsonBuilder().create()
-                val searchResults = gson.fromJson(json, SearchResults::class.java)
             }
             override fun onFailure(call: Call?, e: IOException?) {
                 println("Epic fail!")
             }
         })
-        //startActivity(Intent(this, SearchResultsActivity::class.java))
     }
 
     private fun advancedSearch(isbnCode: String, title: String, author: String, publisher: String) {
@@ -58,16 +55,3 @@ class SearchActivity : AppCompatActivity() {
         fetchBooks(url)
     }
 }
-
-class SearchResults(val items: List<Book>)
-
-class Book(val id: String,
-           val volumeInfo: VolumeInfo)
-
-class VolumeInfo(val title: String,
-                 val authors: List<String>,
-                 val publisher: String,
-                 val publishedDate: String,
-                 val imageLinks:ImageLinks)
-
-class ImageLinks(val smallThumbnail: String)
