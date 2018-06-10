@@ -34,6 +34,8 @@ class SearchActivity : AppCompatActivity() {
             override fun onResponse(call: Call?, response: Response?) {
                 val json = response?.body()?.string()
                 println("Works like a charm!")
+                startActivity(Intent(this@SearchActivity, SearchResultsActivity::class.java)
+                        .putExtra("res", json))     // search results are sent to the new activity as JSON
                 val gson = GsonBuilder().create()
                 val searchResults = gson.fromJson(json, SearchResults::class.java)
             }
