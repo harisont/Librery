@@ -8,8 +8,9 @@
 
     <ImageView
         android:id="@+id/cover"
-        android:layout_width="60dp"
-        android:layout_height="match_parent" />
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/sample_cover" />
 
     <LinearLayout
         android:padding="@dimen/recycler_view_padding"
@@ -21,14 +22,14 @@
             android:id="@+id/author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="8pt"/>
+            android:text="Name Surname" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorAccent"
-            android:textSize="8pt"/>
+            android:text="Book title" />
     </LinearLayout>
 
 </LinearLayout>

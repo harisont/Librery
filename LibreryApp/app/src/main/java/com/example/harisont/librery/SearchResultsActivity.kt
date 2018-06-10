@@ -18,18 +18,3 @@ class SearchResultsActivity : AppCompatActivity() {
         recycler_view.adapter = RecyclerViewAdapter(searchResults)
     }
 }
-
-// CLASSES USED TO PARSE JSON
-
-class SearchResults(val items: List<Book>)
-
-class Book(val id: String,
-           val volumeInfo: VolumeInfo)
-
-class VolumeInfo(val title: String,
-                 val authors: List<String>,
-                 val publisher: String,
-                 val publishedDate: String,
-                 val imageLinks:ImageLinks)
-
-class ImageLinks(val smallThumbnail: String)
