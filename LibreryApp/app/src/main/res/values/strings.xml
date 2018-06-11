@@ -12,6 +12,10 @@
     <string name="save_button">Save to local database</string>
     <string name="pub_button">Publish on your online bookshelf</string>
 
+    <!--toasts-->
+    <string name="fill_fields_toast">Please fill in at least one of the fields!</string>
+    <string name="query_failure">Couldn\'t fetch any data. Please check your network connection.</string>
+
     <!--hints-->
     <string name="hint_title">Title</string>
     <string name="hint_author">Author</string>

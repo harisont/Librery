@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row.view.*
 
-class RecyclerViewAdapter(val BookList: SearchResults): RecyclerView.Adapter<CustomViewHolder>() {
+class RecyclerViewAdapter(private val BookList: SearchResults): RecyclerView.Adapter<CustomViewHolder>() {
 
     override fun getItemCount(): Int {
         return BookList.items.count()
@@ -27,9 +27,16 @@ class RecyclerViewAdapter(val BookList: SearchResults): RecyclerView.Adapter<Cus
         val authorList: List<String>?
         authorList = book.volumeInfo.authors
         val authors = authorList?.joinToString()    // kotlin magic to just join to string if not null
-        val coverThumb = book.volumeInfo.imageLinks.smallThumbnail
+        val coverThumb: String
+        coverThumb = if (book.volumeInfo.imageLinks != null) {  // handle missing thumbnails, causing frequent crashes
+            book.volumeInfo.imageLinks.smallThumbnail
+        } else ""
         val coverView = holder?.v?.cover
-        Picasso.get().load(coverThumb).into(coverView);
+        try {
+            Picasso.get().load(coverThumb).into(coverView) }
+        catch (e: IllegalArgumentException) {
+            println("Image path is probably empty. A placeholder will be used instead.")
+        }
         holder?.v?.title?.text = title
         holder?.v?.author?.text = authors
         holder?.v?.cover?.setImageResource(R.drawable.sample_cover)
