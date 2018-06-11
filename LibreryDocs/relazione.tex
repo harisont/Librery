@@ -54,10 +54,20 @@ Il dispositivo Android è client di due diversi server, uno di Google, al quale 
 Nelle sezioni successive verranno descritti approfonditamente il client ed il server Librery online.
 \newpage
 \section{Il client: l'app Android}
-In questa sezione si è scelto di concentrare l'attenzione sugli aspetti del client realizzato che hanno a che vedere con l'uso delle API di Google Libri e, più in generale, con i vari aspetti del networking, accennando solo in maniera molto breve alle soluzioni proposte per quel che riguarda la realizzazione dell'interfaccia grafica e del database locale.
+In questa sezione si è scelto di concentrare l'attenzione sugli aspetti del client realizzato che hanno a che vedere con l'uso delle API di Google Libri e, più in generale, con i vari aspetti del networking, accennando solo in maniera molto breve alle soluzioni proposte per quel che riguarda la realizzazione dell'interfaccia utente e del database locale.
 	\subsection{Visione d'insieme}
-	% Kotlin
-	% activity (con screnshoot di ricerca e risultati di ricerca)
+	Per la realizzazione dell'applicativo si è scelto il linguaggio Kotlin, totalmente interoperabile con Java e ormai ufficialmente supportato nel mondo Android, anche all'interno di Android Studio. La scelta è dovuta alla peculiare brevità e alla leggibilità del codice Kotlin ed ha permesso di sviluppare l'applicazione in tempi relativamente brevi.\newline
+	Il database locale è realizzato non direttamente in SQLite ma, come raccomandato nella documentazione ufficiale di Android, mediante la libreria Room Persistence.
+	%? Aggiornare activity a lavoro finito
+	A livello di interfaccia utente, l'app è composta da quattro activity:
+	\begin{itemize}
+		\item \code{MainActivity}: schermata in cui è possibile visualizzare l'elenco dei libri letti e l'elenco dei libri da leggere, ossia i risultati di due diverse interrogazioni del database locale;
+		\item \code{SearchActivity}: %?
+		\item \code{SearchResultsActivity}: %?
+		\item \code{ViewBookDetailsActivity}: %?
+		\item \code{LoginActivity}: %?
+		%? immagini schermate d'interesse (login, viewdetails, search, searchresults)
+	\end{itemize}
 	% room persistence database
 	\subsection{Utilizzo delle API di Google Books}
 	\subsection{Librerie}
