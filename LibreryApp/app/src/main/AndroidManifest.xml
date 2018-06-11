@@ -24,12 +24,15 @@
         </activity>
         <activity
             android:name=".SearchActivity"
+            android:label="@string/search_label"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ViewBookDetailsActivity"
+            android:label="@string/book_details_label"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SearchResultsActivity"
+            android:label="@string/search_res_label"
             android:screenOrientation="portrait"/>
     </application>
 

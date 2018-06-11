@@ -8,5 +8,6 @@ class ViewBookDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_book_details)
+        
     }
 }

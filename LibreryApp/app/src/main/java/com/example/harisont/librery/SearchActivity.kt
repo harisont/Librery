@@ -3,12 +3,7 @@ package com.example.harisont.librery
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcelable
-import com.google.gson.GsonBuilder
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.fragment_main.*
 import okhttp3.*
 import java.io.IOException
 
