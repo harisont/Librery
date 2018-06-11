@@ -15,6 +15,7 @@
     <!--toasts-->
     <string name="fill_fields_toast">Please fill in at least one of the fields!</string>
     <string name="query_failure">Couldn\'t fetch any data. Please check your network connection.</string>
+    <string name="no_matching_data">No matching data</string>
 
     <!--hints-->
     <string name="hint_title">Title</string>

@@ -6,13 +6,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row.view.*
 
 class RecyclerViewAdapter(private val BookList: SearchResults): RecyclerView.Adapter<CustomViewHolder>() {
 
     override fun getItemCount(): Int {
-        return BookList.items.count()
+        return try {
+            BookList.items.count()
+        } catch (e: NullPointerException) {
+            0
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
