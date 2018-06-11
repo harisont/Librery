@@ -1,5 +1,7 @@
 package com.example.harisont.librery
 
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -35,5 +37,10 @@ class RecyclerViewAdapter(val BookList: SearchResults): RecyclerView.Adapter<Cus
 }
 
 class CustomViewHolder(val v: View): RecyclerView.ViewHolder(v) {
-
+    init {
+        v.setOnClickListener {
+            val i = Intent(v.context, ViewBookDetailsActivity::class.java)
+            v.context.startActivity(i)
+        }
+    }
 }

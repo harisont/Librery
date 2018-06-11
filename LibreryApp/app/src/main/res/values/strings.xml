@@ -18,4 +18,9 @@
     <string name="hint_publisher">Publisher</string>
     <string name="notes_hint">Review or notes</string>
 
+    <!--activity labels-->
+    <string name="search_label">Search</string>
+    <string name="search_res_label">Search results</string>
+    <string name="book_details_label">Book details</string>
+
 </resources>
