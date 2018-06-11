@@ -3,6 +3,7 @@ package com.example.harisont.librery
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_search.*
 import okhttp3.*
 import java.io.IOException
@@ -39,14 +40,20 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun advancedSearch(isbnCode: String, title: String, author: String, publisher: String) {
-        //val apiKey = "AIzaSyDWQIKMYe6760oFGDbNli8lBVt6IYxga7g"
         val isbn = if (isbnCode != "") "isbn:$isbnCode" else ""
         val intitle = if (title != "") "intitle:$title" else ""
         val inauthor = if (author != "") "inauthor:$author" else ""
         val inpublisher = if (publisher != "") "inpublisher:$publisher" else ""
-        val url = "https://www.googleapis.com/books/v1/volumes/?" +
-                "q=$isbn+$intitle+$inauthor+$inpublisher" +
-                "&projection=lite"
-        fetchBooks(url)
+        val searchParameters = "q=$isbn+$intitle+$inauthor+$inpublisher"
+        if (searchParameters == "q=+++") {  //if there are no search parameters
+            Toast.makeText(this, getString(R.string.fill_fields_toast), Toast.LENGTH_LONG).show()
+
+        }
+        else {
+            val url = "https://www.googleapis.com/books/v1/volumes/?" +
+                    "$searchParameters" +
+                    "&projection=lite"
+            fetchBooks(url)
+        }
     }
 }

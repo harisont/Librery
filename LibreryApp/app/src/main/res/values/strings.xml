@@ -11,6 +11,7 @@
     <string name="cover_desc">Cover image</string>
     <string name="save_button">Save to local database</string>
     <string name="pub_button">Publish on your online bookshelf</string>
+    <string name="fill_fields_toast">Please fill in at least one of the fields</string>
 
     <!--hints-->
     <string name="hint_title">Title</string>
