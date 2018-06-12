@@ -1,5 +1,6 @@
 package com.example.harisont.librery
 
+import android.arch.persistence.room.Room
 import android.content.Intent
 import android.graphics.Color
 import android.support.design.widget.TabLayout
@@ -37,6 +38,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        Thread {
+            val db = Room.databaseBuilder(
+                    applicationContext,
+                    AppDB::class.java,
+                    "bookDB"
+            ).build()
+
+            // SAMPLE
+            /*val mockBook1 = BookEntity()
+            mockBook1.id = "1"
+            mockBook1.title = "Titolo"
+            mockBook1.read = true
+
+            val mockBook2 = BookEntity()
+            mockBook2.id = "2"
+            mockBook2.title = "Altro titolo"
+            mockBook2.read = false
+
+            db.bookDAO().saveBookData(mockBook1)
+            db.bookDAO().saveBookData(mockBook2)
+            val all = db.bookDAO().selectAll()
+            println("ALL: $all")*/
+        }.start()
 
         setSupportActionBar(toolbar)
         // Create the adapter that will return a fragment for each of the three
