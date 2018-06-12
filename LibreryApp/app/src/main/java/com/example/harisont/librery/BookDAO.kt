@@ -1,9 +1,6 @@
 package com.example.harisont.librery
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 
 @Dao
 interface BookDAO {
@@ -14,6 +11,9 @@ interface BookDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveBookData(book: BookEntity)
 
+    @Delete
+    fun deleteBookData(book: BookEntity)
+
     @Query("SELECT title, authors, thumbnailURL FROM BookEntity WHERE read = 1")
     fun selectHaveRead(): List<BookEntity>
 
@@ -22,6 +22,8 @@ interface BookDAO {
 
     @Query("SELECT * from BookEntity WHERE id = :id")
     fun selectBook(id: String)
+
+
 
 }
 
