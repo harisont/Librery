@@ -3,37 +3,46 @@ package com.example.harisont.librery
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import org.jetbrains.annotations.NotNull
 
 // LOCAL DATABASE TABLE
-// TODO: add constraints
 
 @Entity
-class BookEntity {
+class BookEntity constructor(
+        id: String,
+        title: String?,
+        authors: String?,
+        publisher: String?,
+        publishedDate: String?,
+        thumbnailURL: String?,
+        read: Boolean,
+        rating: Int?,
+        notes: String?) {
 
     @PrimaryKey
-    var id: String = ""
+    var id: String = id
 
     @ColumnInfo
-    var title: String? = null
+    var title: String? = title
 
     @ColumnInfo
-    var authors: String? = null
+    var authors: String? = authors
 
     @ColumnInfo
-    var publisher: String? = null
+    var publisher: String? = publisher
 
     @ColumnInfo
-    var publishedDate: String? = null   // TODO: change data type
+    var publishedDate: String? = publishedDate   // TODO: change data type
 
     @ColumnInfo
-    var thumbnailURL: String? = null
+    var thumbnailURL: String? = thumbnailURL
+
+    @ColumnInfo @NotNull
+    var read: Boolean = read
 
     @ColumnInfo
-    var read: Boolean? = false
+    var rating: Int? = rating
 
     @ColumnInfo
-    var rating: Int? = null
-
-    @ColumnInfo
-    var notes: String? = null
+    var notes: String? = notes
 }
