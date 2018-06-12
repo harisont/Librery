@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+
 androidExtensions {
     experimental = true
 }
@@ -38,6 +41,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.google.code.gson:gson:2.8.4'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "android.arch.persistence.room:runtime:1.0.0-rc1"
+    kapt "android.arch.persistence.room:compiler:1.0.0-rc1"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
