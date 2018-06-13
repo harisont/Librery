@@ -27,7 +27,7 @@ class ViewBookDetailsActivity : AppCompatActivity() {
         book_publisher.text = publisher
         book_year.text = publishedDate
         if (thumbnailURL != "") {
-            try {
+            try {   // TODO: issue #31
                 Picasso.get().load(thumbnailURL).into(book_cover)
             } catch (e: IllegalArgumentException) {
                 println("Image path is probably empty. A placeholder will be used instead.")
@@ -35,5 +35,17 @@ class ViewBookDetailsActivity : AppCompatActivity() {
         }
         else book_cover.setImageResource(R.drawable.sample_cover)
 
+        save_button.setOnClickListener {
+            val record = BookEntity(
+                    id,
+                    title,
+                    authors,
+                    publisher,
+                    publishedDate,
+                    thumbnailURL,
+                    read_chbox.isChecked,
+                    rating_bar.rating,
+                    notes.toString())
+        }
     }
 }
