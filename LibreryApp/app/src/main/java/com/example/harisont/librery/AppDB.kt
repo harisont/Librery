@@ -20,6 +20,7 @@ abstract class AppDB: RoomDatabase() {
                             context.applicationContext,
                             AppDB::class.java,
                             "books.db").build()
+                    println("DATABASE created")
                 }
             }
             return INSTANCE

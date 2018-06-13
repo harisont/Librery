@@ -8,9 +8,13 @@ import kotlin.concurrent.thread
 
 class ViewBookDetailsActivity : AppCompatActivity() {
 
+    private var db: AppDB? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_book_details)
+
+        db = AppDB.getInstance(this)
 
         // GET EXTRAS
         val extras = intent.extras
@@ -47,9 +51,10 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                     read_chbox.isChecked,
                     rating_bar.rating,
                     notes.toString())
+            thread {
+                db?.bookDAO()?.saveBookData(record)
+                println("RECORDS:"+db?.bookDAO()?.selectAll()?.size)
+            }
         }
-        thread {
-            AppDB.getInstance(this)
-        }.start()
     }
 }
