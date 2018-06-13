@@ -16,7 +16,7 @@ class BookEntity constructor(
         publishedDate: String?,
         thumbnailURL: String?,
         read: Boolean,
-        rating: Int?,
+        rating: Float,
         notes: String?) {
 
     @PrimaryKey
@@ -40,8 +40,8 @@ class BookEntity constructor(
     @ColumnInfo @NotNull
     var read: Boolean = read
 
-    @ColumnInfo
-    var rating: Int? = rating
+    @ColumnInfo // TODO: add constraints
+    var rating: Float = rating
 
     @ColumnInfo
     var notes: String? = notes

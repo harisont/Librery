@@ -21,7 +21,7 @@ interface BookDAO {
     fun selectToRead(): List<BookEntity>
 
     @Query("SELECT * from BookEntity WHERE id = :id")
-    fun selectBook(id: String): BookEntity
+    fun selectBook(id: String): BookEntity?
 
 
 
