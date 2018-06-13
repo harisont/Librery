@@ -1,6 +1,7 @@
 package com.example.harisont.librery
 
 import android.content.Intent
+import android.os.Bundle
 import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -28,10 +29,9 @@ class RecyclerViewAdapter(private val BookList: SearchResults): RecyclerView.Ada
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val book = BookList.items[position]
+        holder?.book = book  // public accessible book
         val title = book.volumeInfo.title
-        val authorList: List<String>?
-        authorList = book.volumeInfo.authors
-        val authors = authorList?.joinToString()    // kotlin magic to just join to string if not null
+        val authors = listStringToString(book.volumeInfo.authors)
         val coverThumb: String
         coverThumb = if (book.volumeInfo.imageLinks != null) {  // handle missing thumbnails, causing frequent crashes
             book.volumeInfo.imageLinks.smallThumbnail
@@ -48,11 +48,33 @@ class RecyclerViewAdapter(private val BookList: SearchResults): RecyclerView.Ada
     }
 }
 
-class CustomViewHolder(val v: View): RecyclerView.ViewHolder(v) {
+class CustomViewHolder(val v: View, var book: Book? = null): RecyclerView.ViewHolder(v) {
+
+    companion object {
+        const val ID = "ID_K"
+        const val TITLE = "TITLE_K"
+        const val AUTHORS = "AUTHORS_K"
+        const val PUBLISHER = "PUBLISHER_K"
+        const val PUBLISHED_DATE = "PUBLISHED_DATE_K"
+        const val THUMBNAIL_URL = "THUMBNAIL_URL_K"
+    }
+
     init {
         v.setOnClickListener {
             val i = Intent(v.context, ViewBookDetailsActivity::class.java)
+            val e = Bundle()
+            e.putString(ID, book?.id)
+            e.putString(TITLE, book?.volumeInfo?.title)
+            e.putString(AUTHORS, listStringToString(book?.volumeInfo?.authors))
+            e.putString(PUBLISHER, book?.volumeInfo?.publisher)
+            e.putString(PUBLISHED_DATE, book?.volumeInfo?.publishedDate)
+            e.putString(THUMBNAIL_URL, book?.volumeInfo?.imageLinks?.smallThumbnail)
+            i.putExtras(e)
             v.context.startActivity(i)
         }
     }
+}
+
+fun listStringToString(list: List<String>?): String? {
+    return  list?.joinToString()
 }
