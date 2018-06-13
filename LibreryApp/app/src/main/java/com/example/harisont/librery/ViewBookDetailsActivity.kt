@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_view_book_details.*
+import kotlin.concurrent.thread
 
 class ViewBookDetailsActivity : AppCompatActivity() {
 
@@ -47,5 +48,8 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                     rating_bar.rating,
                     notes.toString())
         }
+        thread {
+            AppDB.getInstance(this)
+        }.start()
     }
 }
