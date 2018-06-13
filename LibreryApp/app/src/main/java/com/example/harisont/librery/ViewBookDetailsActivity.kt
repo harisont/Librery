@@ -2,6 +2,7 @@ package com.example.harisont.librery
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_view_book_details.*
 import kotlin.concurrent.thread
@@ -53,7 +54,23 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                     notes.toString())
             thread {
                 db?.bookDAO()?.saveBookData(record)
-                println("RECORDS:"+db?.bookDAO()?.selectAll()?.size)
+                println("RECORD COUNT:"+db?.bookDAO()?.selectAll()?.size)
+            }
+        }
+
+        del_button.setOnClickListener {
+            thread {
+                val toBeDeleted = db?.bookDAO()?.selectBook(id)
+                if (toBeDeleted != null) {
+                    // TODO: add dialog
+                    db?.bookDAO()?.deleteBookData(toBeDeleted)
+                }
+                else {  // TODO: check why is not functioning
+                    runOnUiThread {
+                        Toast.makeText(this, R.string.not_in_db, Toast.LENGTH_LONG).show()
+                    }
+                }
+                println("RECORD COUNT:" + db?.bookDAO()?.selectAll()?.size)
             }
         }
     }
