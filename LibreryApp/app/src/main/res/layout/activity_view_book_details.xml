@@ -99,9 +99,16 @@
                 android:text="@string/save_button" />
 
             <Button
+                android:id="@+id/del_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/del_button"/>
+
+            <Button
                 android:id="@+id/pub_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
                 android:text="@string/pub_button" />
 
         </LinearLayout>

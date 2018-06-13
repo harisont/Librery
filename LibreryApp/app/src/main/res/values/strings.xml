@@ -9,7 +9,10 @@
     <string name="search_butt">Search</string>
     <string name="hint_isbn">ISBN</string>
     <string name="cover_desc">Cover image</string>
-    <string name="save_button">Save to local database</string>
+
+    <!--buttons-->
+    <string name="save_button">Save to local db</string>
+    <string name="del_button">Remove from local db</string>
     <string name="pub_button">Publish on your online bookshelf</string>
 
     <!--toasts-->
