@@ -6,37 +6,19 @@
 \usepackage{float} %per posizione assoluta delle immagini [H]
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
 \usepackage{nameref} 
-
 \graphicspath{{./images/}}
-
-%defines-----------------------------------
 \def\code#1{\texttt{#1}}
-\def\sec#1{\section{#1}\label{#1}} 
-\def\sub#1{\subsection{#1}\label{#1}} 
-\def\subsub#1{\subsubsection{#1}\label{#1}} 
-\def\para#1{\paragraph{#1}\label{#1}}
-\def\vedi#1{\nameref{#1}} 
-\def\italic#1{\textit{#1}}
 \def\image[#1][#2]#3{
   \begin{figure}[H]
   \centering
   \includegraphics[#2]{#1}
   \caption{#3}
   \end{figure}}
-\def\boximage[#1][#2]#3{
-  \begin{figure}[H]
-  \centering
-  \fbox{\includegraphics[#2]{#1}}
-  \caption{#3}
-  \end{figure}}
-\def\footurl[#1]#2{\href{#2}{#1}\footnote{\url{#2}}}
-%------------------------------------------
 
 \title{Librery: un'app per la gestione e la condivisione delle proprie letture}
 \author{Arianna Masciolini}
 
 \begin{document}
-
 \maketitle
 \newpage
 \tableofcontents
@@ -64,7 +46,7 @@ In questa sezione si è scelto di concentrare l'attenzione sugli aspetti del cli
 		\item \code{MainActivity}: schermata composta di due \code{Fragment} in cui è possibile visualizzare, sotto forma di \code{RecyclerView}, l'elenco dei libri letti e l'elenco dei libri da leggere, ossia i risultati di due diverse interrogazioni del database locale;
 		\item \code{SearchActivity}: schermata tramite la quale l'utente può effettuare ricerche in Google Libri. Il risultato è una stringa in formato JSON, che per semplicità viene passata come tale a \code{SearchResultsActivity};
 		\item \code{SearchResultsActivity}: qui avviene il parsing del JSON ottenuto in risposta dai server di Google Books ed i risultati vengono visualizzati in una \code{RecyclerView} del tutto analoga a quella impiegata in \code{MainActiviy};
-		\item \code{ViewBookDetailsActivity}: %?
+		\item \code{ViewBookDetailsActivity}: permette di visualizzare i dettagli di un libro selezionato da una \code{RecyclerView}, modificarne alcuni attributi, ad esempio la valutazione, e salvarli localmente e/o online;
 		\item \code{LoginActivity}: %?
 		%? immagini schermate d'interesse (login, viewdetails, search, searchresults)
 	\end{itemize}
@@ -74,7 +56,6 @@ In questa sezione si è scelto di concentrare l'attenzione sugli aspetti del cli
 		\subsubsection{OkHTTP}
 		\subsubsection{Gson}
 		\subsubsection{Picasso}
-
 \newpage
 \section{Il server per la condivisione online del proprio scaffale}
 
