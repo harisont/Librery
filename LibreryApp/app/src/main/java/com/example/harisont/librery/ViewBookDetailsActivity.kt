@@ -66,6 +66,9 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                     notes.text.toString())
             thread {
                 db?.bookDAO()?.saveBookData(record)
+                runOnUiThread {
+                    Toast.makeText(this, R.string.added, Toast.LENGTH_LONG).show()
+                }
                 println("RECORD COUNT:"+db?.bookDAO()?.selectAll()?.size)
             }
         }
@@ -76,6 +79,9 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                 if (toBeDeleted != null) {
                     // TODO: add dialog
                     db?.bookDAO()?.deleteBookData(toBeDeleted)
+                    runOnUiThread {
+                        Toast.makeText(this, R.string.deleted, Toast.LENGTH_LONG).show()
+                    }
                 }
                 else {  // TODO: check why is not functioning
                     runOnUiThread {
