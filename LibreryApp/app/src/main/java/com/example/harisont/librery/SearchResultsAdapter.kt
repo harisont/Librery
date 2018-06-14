@@ -11,11 +11,11 @@ import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row.view.*
 
-class SearchResultsAdapter(private val BookList: SearchResults): RecyclerView.Adapter<CustomViewHolder>() {
+class SearchResultsAdapter(private val bookList: SearchResults): RecyclerView.Adapter<CustomViewHolder>() {
 
     override fun getItemCount(): Int {
         return try {
-            BookList.items.count()
+            bookList.items.count()
         } catch (e: NullPointerException) {
             0
         }
@@ -28,7 +28,7 @@ class SearchResultsAdapter(private val BookList: SearchResults): RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val book = BookList.items[position]
+        val book = bookList.items[position]
         holder?.book = book  // public accessible book
         val title = book.volumeInfo.title
         val authors = listStringToString(book.volumeInfo.authors)
