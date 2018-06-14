@@ -2,10 +2,16 @@ package com.example.harisont.librery
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_view_book_details.*
 import kotlin.concurrent.thread
+import android.widget.TextView
+import android.R.drawable.edit_text
+import android.widget.EditText
+
+
 
 class ViewBookDetailsActivity : AppCompatActivity() {
 
@@ -26,6 +32,9 @@ class ViewBookDetailsActivity : AppCompatActivity() {
         val publisher = extras.getString(CustomViewHolder.PUBLISHER)
         val publishedDate = extras.getString(CustomViewHolder.PUBLISHED_DATE)
         val thumbnailURL = extras.getString(CustomViewHolder.THUMBNAIL_URL)
+        val read = extras.getBoolean(CustomViewHolder.READ)
+        val rating = extras.getFloat(CustomViewHolder.RATING)
+        val notesStr = extras.getString(CustomViewHolder.NOTES)
 
         // UPDATE GUI
         book_title.text = title
@@ -40,6 +49,9 @@ class ViewBookDetailsActivity : AppCompatActivity() {
             }
         }
         else book_cover.setImageResource(R.drawable.sample_cover)
+        notes.setText(notesStr, TextView.BufferType.EDITABLE)
+        read_chbox.isChecked = read
+        rating_bar.rating = rating
 
         save_button.setOnClickListener {
             val record = BookEntity(
@@ -51,7 +63,7 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                     thumbnailURL,
                     read_chbox.isChecked,
                     rating_bar.rating,
-                    notes.toString())
+                    notes.text.toString())
             thread {
                 db?.bookDAO()?.saveBookData(record)
                 println("RECORD COUNT:"+db?.bookDAO()?.selectAll()?.size)
