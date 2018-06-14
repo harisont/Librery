@@ -11,7 +11,7 @@ import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row.view.*
 
-class SearchResultsAdapter(private val bookList: List<Any>): RecyclerView.Adapter<CustomViewHolder>() {
+class RecyclerViewAdapter(private val bookList: List<Any>): RecyclerView.Adapter<CustomViewHolder>() {
 
     override fun getItemCount(): Int {
         return try {
