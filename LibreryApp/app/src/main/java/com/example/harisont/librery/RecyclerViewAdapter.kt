@@ -32,6 +32,7 @@ class RecyclerViewAdapter(private val bookList: List<Any>): RecyclerView.Adapter
         val title: String?
         val authors: String?
         val coverThumb: String?
+
         if (book is Book) {
             holder?.book = book  // public accessible book
             title = book.volumeInfo.title
@@ -47,6 +48,7 @@ class RecyclerViewAdapter(private val bookList: List<Any>): RecyclerView.Adapter
             coverThumb = if (book.thumbnailURL != null) {  // handle missing thumbnails, causing frequent crashes
                 book.thumbnailURL
             } else ""
+
         }
         else {
             title = ""
