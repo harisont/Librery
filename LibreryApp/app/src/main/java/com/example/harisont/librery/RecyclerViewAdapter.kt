@@ -57,7 +57,7 @@ class RecyclerViewAdapter(private val bookList: List<Any>): RecyclerView.Adapter
         }
         val coverView = holder?.v?.cover
         try {
-            Picasso.get().load(coverThumb).into(coverView) }
+            Picasso.get().load(coverThumb+Math.random()).into(coverView) }  // Randomness to refresh (wow!)
         catch (e: IllegalArgumentException) {
             println("Image path is probably empty. A placeholder will be used instead.")
         }

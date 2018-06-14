@@ -74,9 +74,9 @@ class MainActivity : AppCompatActivity() {
         val id = item.itemId
 
         if (id == R.id.action_settings) {
+            recreate()
             return true
         }
-
         return super.onOptionsItemSelected(item)
     }
 
