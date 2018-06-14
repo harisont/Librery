@@ -11,11 +11,11 @@ import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row.view.*
 
-class SearchResultsAdapter(private val bookList: SearchResults): RecyclerView.Adapter<CustomViewHolder>() {
+class SearchResultsAdapter(private val bookList: List<Any>): RecyclerView.Adapter<CustomViewHolder>() {
 
     override fun getItemCount(): Int {
         return try {
-            bookList.items.count()
+            bookList.count()
         } catch (e: NullPointerException) {
             0
         }
@@ -28,14 +28,31 @@ class SearchResultsAdapter(private val bookList: SearchResults): RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val book = bookList.items[position]
-        holder?.book = book  // public accessible book
-        val title = book.volumeInfo.title
-        val authors = listStringToString(book.volumeInfo.authors)
-        val coverThumb: String
-        coverThumb = if (book.volumeInfo.imageLinks != null) {  // handle missing thumbnails, causing frequent crashes
-            book.volumeInfo.imageLinks.smallThumbnail
-        } else ""
+        val book = bookList[position]
+        val title: String?
+        val authors: String?
+        val coverThumb: String?
+        if (book is Book) {
+            holder?.book = book  // public accessible book
+            title = book.volumeInfo.title
+            authors = listStringToString(book.volumeInfo.authors)
+            coverThumb = if (book.volumeInfo.imageLinks != null) {  // handle missing thumbnails, causing frequent crashes
+                book.volumeInfo.imageLinks.smallThumbnail
+            } else ""
+        }
+        else if (book is BookEntity) {
+            holder?.book = book
+            title = book.title
+            authors = book.authors
+            coverThumb = if (book.thumbnailURL != null) {  // handle missing thumbnails, causing frequent crashes
+                book.thumbnailURL
+            } else ""
+        }
+        else {
+            title = ""
+            authors = ""
+            coverThumb = ""
+        }
         val coverView = holder?.v?.cover
         try {
             Picasso.get().load(coverThumb).into(coverView) }
@@ -48,7 +65,7 @@ class SearchResultsAdapter(private val bookList: SearchResults): RecyclerView.Ad
     }
 }
 
-class CustomViewHolder(val v: View, var book: Book? = null): RecyclerView.ViewHolder(v) {
+class CustomViewHolder(val v: View, var book: Any? = null): RecyclerView.ViewHolder(v) {
 
     companion object {
         const val ID = "ID_K"
@@ -57,18 +74,34 @@ class CustomViewHolder(val v: View, var book: Book? = null): RecyclerView.ViewHo
         const val PUBLISHER = "PUBLISHER_K"
         const val PUBLISHED_DATE = "PUBLISHED_DATE_K"
         const val THUMBNAIL_URL = "THUMBNAIL_URL_K"
+        const val READ = "READ_K"
+        const val RATING = "RATING_K"
+        const val NOTES = "NOTES_K"
     }
 
     init {
         v.setOnClickListener {
             val i = Intent(v.context, ViewBookDetailsActivity::class.java)
             val e = Bundle()
-            e.putString(ID, book?.id)
-            e.putString(TITLE, book?.volumeInfo?.title)
-            e.putString(AUTHORS, listStringToString(book?.volumeInfo?.authors))
-            e.putString(PUBLISHER, book?.volumeInfo?.publisher)
-            e.putString(PUBLISHED_DATE, book?.volumeInfo?.publishedDate)
-            e.putString(THUMBNAIL_URL, book?.volumeInfo?.imageLinks?.smallThumbnail)
+            if (book is Book) {
+                e.putString(ID, (book as Book)?.id)
+                e.putString(TITLE, (book as Book)?.volumeInfo?.title)
+                e.putString(AUTHORS, listStringToString((book as Book)?.volumeInfo?.authors))
+                e.putString(PUBLISHER, (book as Book)?.volumeInfo?.publisher)
+                e.putString(PUBLISHED_DATE, (book as Book)?.volumeInfo?.publishedDate)
+                e.putString(THUMBNAIL_URL, (book as Book)?.volumeInfo?.imageLinks?.smallThumbnail)
+            }
+            else if (book is BookEntity) {
+                e.putString(ID, (book as BookEntity)?.id)
+                e.putString(TITLE, (book as BookEntity)?.title)
+                e.putString(AUTHORS, (book as BookEntity)?.authors)
+                e.putString(PUBLISHER, (book as BookEntity)?.publisher)
+                e.putString(PUBLISHED_DATE, (book as BookEntity)?.publishedDate)
+                e.putString(THUMBNAIL_URL, (book as BookEntity)?.thumbnailURL)
+                e.putBoolean(READ, (book as BookEntity)?.read)
+                e.putFloat(RATING, (book as BookEntity)?.rating)
+                e.putString(NOTES, (book as BookEntity)?.notes)
+            }
             i.putExtras(e)
             v.context.startActivity(i)
         }

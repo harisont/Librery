@@ -16,7 +16,7 @@ class SearchResultsActivity : AppCompatActivity() {
         val gson = GsonBuilder().create()
         val searchResults = gson.fromJson(json, SearchResults::class.java)
         recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.adapter = SearchResultsAdapter(searchResults)
+        recycler_view.adapter = SearchResultsAdapter(searchResults.items)
         if (recycler_view.adapter.itemCount == 0) {
             Toast.makeText(this@SearchResultsActivity, R.string.no_matching_data, Toast.LENGTH_LONG).show()
             finish()
