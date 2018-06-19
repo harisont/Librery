@@ -6,6 +6,7 @@
     <string name="book_title">Title: </string>
     <string name="book_author">Author: </string>
     <string name="search">Advanced search</string>
+    <string name="share">Share something about this book...</string>
     <string name="search_butt">Search</string>
     <string name="hint_isbn">ISBN</string>
     <string name="cover_desc">Cover image</string>
@@ -13,11 +14,12 @@
     <!--buttons-->
     <string name="save_button">Save to local db</string>
     <string name="del_button">Remove from local db</string>
-    <string name="pub_button">Publish on your online bookshelf</string>
+    <string name="pub_button">Share online</string>
 
     <!--toasts-->
     <string name="fill_fields_toast">Please fill in at least one of the fields!</string>
-    <string name="query_failure">Couldn\'t fetch any data. Please check your network connection.</string>
+    <string name="query_failure">Couldn\'t fetch any data.</string>
+    <string name="not_connected">Please check your network connection.</string>
     <string name="no_matching_data">No matching data.</string>
     <string name="not_in_db">This book is not in the local database.</string>
     <string name="deleted">This book was removed from your local databases.</string>
@@ -28,10 +30,12 @@
     <string name="hint_author">Author</string>
     <string name="hint_publisher">Publisher</string>
     <string name="notes_hint">Review or notes</string>
+    <string name="comment_hint">Share your thoughts</string>
 
     <!--activity labels-->
     <string name="search_label">Search</string>
     <string name="search_res_label">Search results</string>
     <string name="book_details_label">Book details</string>
+    <string name="share_label">Share</string>
 
 </resources>

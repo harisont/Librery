@@ -24,14 +24,14 @@
 \tableofcontents
 \newpage
 \section{Introduzione}
-Librery è un'applicazione Android completamente libera ed open source volta alla gestione delle proprie letture. Essa permette di effettuare ricerche nel più grande indice di testi integrali esistente tramite le API RESTful di Google Libri e di salvare localmente i dati relativi ai libri letti o che s'intende leggere. L'utente può aggiungere delle annotazioni e la propria valutazione ai libri letti e, grazie ad un servizio web anch'esso realizzato nell'ambito del progetto Librery, mantenere un proprio "scaffale" pubblico online volto a condividere con altri bibliofili i propri libri preferiti.
+Librery è un'applicazione Android completamente libera ed open source volta alla gestione delle proprie letture. Essa permette di effettuare ricerche nel più grande indice di testi integrali esistente tramite le API RESTful di Google Libri e di salvare localmente i dati relativi ai libri letti o che s'intende leggere. L'utente può aggiungere delle annotazioni e la propria valutazione ai libri letti e, grazie ad un servizio web anch'esso realizzato nell'ambito del progetto Librery, collaborare al mantenimanto di uno proprio "scaffale" pubblico online volto a condividere con altri bibliofili i propri libri preferiti.
 	\subsection{Casi d'uso}
-	Tutte le sopra citate funzionalità sono presenti in Google Libri, che è ormai non solo un motore di ricerca specializzato, ma un servizio web complesso e articolato collegato agli account Google dei propri utenti. \newline
-	Librery, che effettua solamente richieste di dati pubblici a Google Libri e che dunque non necessita affatto un account Google, vuole proporsi come una più semplice ma valida alternativa per quanti preferiscono avere la possibilità di mantenere un certo grado di riservatezza sui propri dati personali, eventualmente indicando in modo esplicito i dati di quali volumi vadano pubblicati online.
+	Tutte le sopra citate funzionalità - ed altre - sono presenti in Google Libri, che è ormai non solo un motore di ricerca specializzato, ma un servizio web complesso e articolato, collegato agli account Google dei propri utenti e disponibile anche come app Android. \newline
+	Librery, che effettua solamente richieste di dati pubblici a Google Libri e che dunque non necessita affatto di un account, vuole proporsi come una più semplice ma valida alternativa per quanti preferiscono avere la possibilità di mantenere un certo grado di riservatezza sui propri dati personali, eventualmente indicando in modo esplicito quali informazioni vadano rese pubbliche.
 \newpage
 \section{Architettura}
 L'architettura di Librery è piuttosto semplice, ma inusuale. 
-Il dispositivo Android è client di due diversi server, uno di Google, al quale vengono effettuate le richieste JSON nel momento in cui si fa una ricerca, l'altro realizzato nell'ambito del progetto Librery, volto a gestire le collezioni pubbliche di libri dei diversi utenti, cui l'app invia parte dei dati salvati nel proprio database locale.
+Il dispositivo Android è client di due diversi server, uno di Google, al quale vengono effettuate le richieste JSON nel momento in cui si fa una ricerca, l'altro realizzato nell'ambito del progetto Librery e hostato su Altervista, volto a gestire i dati pubblici inviati dagli utenti a partire dal proprio database locale.
 \image[diagram.png][scale=0.7]{Architettura del progetto Librery}
 Nelle sezioni successive verranno descritti approfonditamente il client ed il server Librery online.
 \newpage
@@ -47,8 +47,8 @@ In questa sezione si è scelto di concentrare l'attenzione sugli aspetti del cli
 		\item \code{SearchActivity}: schermata tramite la quale l'utente può effettuare ricerche in Google Libri. Il risultato è una stringa in formato JSON, che per semplicità viene passata come tale a \code{SearchResultsActivity};
 		\item \code{SearchResultsActivity}: qui avviene il parsing del JSON ottenuto in risposta dai server di Google Books ed i risultati vengono visualizzati in una \code{RecyclerView} del tutto analoga a quella impiegata in \code{MainActiviy};
 		\item \code{ViewBookDetailsActivity}: permette di visualizzare i dettagli di un libro selezionato da una \code{RecyclerView}, modificarne alcuni attributi, ad esempio la valutazione, e salvarli localmente e/o online;
-		\item \code{LoginActivity}: %?
-		%? immagini schermate d'interesse (login, viewdetails, search, searchresults)
+		\item \code{ShareActivity}: permette di pubblicare le informazioni relative ad un libro.
+		%? immagini schermate d'interesse 
 	\end{itemize}
 	% room persistence database
 	\subsection{Utilizzo delle API di Google Books}
