@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_view_book_details.*
 import kotlin.concurrent.thread
 import android.widget.TextView
 import android.R.drawable.edit_text
+import android.content.Intent
 import android.widget.EditText
 
 
@@ -90,6 +91,17 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                 }
                 println("RECORD COUNT:" + db?.bookDAO()?.selectAll()?.size)
             }
+        }
+
+        pub_button.setOnClickListener {
+            if (CheckNetworkStatus.isNetworkAvailable(this)) {
+                val i = Intent(this, ShareActivity::class.java)
+                val e = Bundle()
+                e.putString("id", id)
+                e.putFloat("rating", rating)
+                startActivity(i.putExtras(e))
+            }
+            else Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_LONG).show()
         }
     }
 }

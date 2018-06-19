@@ -13,7 +13,7 @@
     <!--buttons-->
     <string name="save_button">Save to local db</string>
     <string name="del_button">Remove from local db</string>
-    <string name="pub_button">Publish on your online bookshelf</string>
+    <string name="pub_button">Share online</string>
 
     <!--toasts-->
     <string name="fill_fields_toast">Please fill in at least one of the fields!</string>
@@ -34,5 +34,6 @@
     <string name="search_label">Search</string>
     <string name="search_res_label">Search results</string>
     <string name="book_details_label">Book details</string>
+    <string name="share_label">Share</string>
 
 </resources>
