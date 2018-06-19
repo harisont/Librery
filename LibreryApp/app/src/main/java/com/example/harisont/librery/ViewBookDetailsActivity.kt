@@ -98,7 +98,8 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                 val i = Intent(this, ShareActivity::class.java)
                 val e = Bundle()
                 e.putString("id", id)
-                e.putFloat("rating", rating)
+                e.putFloat("def_rating", rating_bar.rating)
+                e.putString("def_notes", notes.text.toString())
                 startActivity(i.putExtras(e))
             }
             else Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_LONG).show()

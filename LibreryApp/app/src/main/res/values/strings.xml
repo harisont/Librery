@@ -6,6 +6,7 @@
     <string name="book_title">Title: </string>
     <string name="book_author">Author: </string>
     <string name="search">Advanced search</string>
+    <string name="share">Share something about this book...</string>
     <string name="search_butt">Search</string>
     <string name="hint_isbn">ISBN</string>
     <string name="cover_desc">Cover image</string>
@@ -29,6 +30,7 @@
     <string name="hint_author">Author</string>
     <string name="hint_publisher">Publisher</string>
     <string name="notes_hint">Review or notes</string>
+    <string name="comment_hint">Share your thoughts</string>
 
     <!--activity labels-->
     <string name="search_label">Search</string>
