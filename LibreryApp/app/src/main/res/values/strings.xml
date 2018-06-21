@@ -7,11 +7,12 @@
     <string name="book_author">Author: </string>
     <string name="search">Advanced search</string>
     <string name="share">Share something about this book...</string>
-    <string name="search_butt">Search</string>
     <string name="hint_isbn">ISBN</string>
     <string name="cover_desc">Cover image</string>
 
     <!--buttons-->
+    <string name="search_butt">Search</string>
+    <string name="post_butt">Post</string>
     <string name="save_button">Save to local db</string>
     <string name="del_button">Remove from local db</string>
     <string name="pub_button">Share online</string>
