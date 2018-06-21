@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_view_book_details.*
 import kotlin.concurrent.thread
 import android.widget.TextView
 import android.R.drawable.edit_text
+import android.content.Intent
 import android.widget.EditText
 
 
@@ -83,13 +84,25 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                         Toast.makeText(this, R.string.deleted, Toast.LENGTH_LONG).show()
                     }
                 }
-                else {  // TODO: check why is not functioning
+                else {
                     runOnUiThread {
                         Toast.makeText(this, R.string.not_in_db, Toast.LENGTH_LONG).show()
                     }
                 }
                 println("RECORD COUNT:" + db?.bookDAO()?.selectAll()?.size)
             }
+        }
+
+        pub_button.setOnClickListener {
+            if (CheckNetworkStatus.isNetworkAvailable(this)) {
+                val i = Intent(this, ShareActivity::class.java)
+                val e = Bundle()
+                e.putString("id", id)
+                e.putFloat("def_rating", rating_bar.rating)
+                e.putString("def_notes", notes.text.toString())
+                startActivity(i.putExtras(e))
+            }
+            else Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_LONG).show()
         }
     }
 }

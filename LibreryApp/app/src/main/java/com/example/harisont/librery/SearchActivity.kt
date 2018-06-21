@@ -26,25 +26,27 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun fetchBooks(url:String) {
-        val client = OkHttpClient()
-        val req = Request.Builder().url(url).build()
-        thread {
-            client.newCall(req).enqueue(object : Callback {  // cannot use .execute() in the UI thread
-                override fun onResponse(call: Call?, response: Response?) {
-                    val json = response?.body()?.string()
-                    println("Works like a charm!")
-                    startActivity(Intent(this@SearchActivity, SearchResultsActivity::class.java)
-                            .putExtra("res", json))     // search results are sent to the new activity as JSON
-                }
-
-                override fun onFailure(call: Call?, e: IOException?) {
-                    println("Epic fail!")
-                    runOnUiThread {
-                        Toast.makeText(this@SearchActivity, getString(R.string.query_failure), Toast.LENGTH_LONG).show()
+        if (CheckNetworkStatus.isNetworkAvailable(this)) {
+            val client = OkHttpClient()
+            val req = Request.Builder().url(url).build()
+            thread {
+                client.newCall(req).enqueue(object : Callback {  // cannot use .execute() in the UI thread
+                    override fun onResponse(call: Call?, response: Response?) {
+                        val json = response?.body()?.string()
+                        println("Works like a charm!")
+                        startActivity(Intent(this@SearchActivity, SearchResultsActivity::class.java)
+                                .putExtra("res", json))     // search results are sent to the new activity as JSON
                     }
-                }
-            })
-        }
+
+                    override fun onFailure(call: Call?, e: IOException?) {
+                        println("Epic fail!")
+                        runOnUiThread {
+                            Toast.makeText(this@SearchActivity, getString(R.string.query_failure), Toast.LENGTH_LONG).show()
+                        }
+                    }
+                })
+            }
+        } else Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_LONG).show()
     }
 
     private fun advancedSearch(isbnCode: String, title: String, author: String, publisher: String) {

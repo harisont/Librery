@@ -3,6 +3,7 @@
     package="com.example.harisont.librery">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -33,7 +34,10 @@
         <activity
             android:name=".SearchResultsActivity"
             android:label="@string/search_res_label"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity android:name=".ShareActivity"
+            android:label="@string/share_label"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
