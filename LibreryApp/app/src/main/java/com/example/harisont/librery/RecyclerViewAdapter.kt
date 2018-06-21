@@ -21,7 +21,7 @@ class RecyclerViewAdapter(private val bookList: List<Any>): RecyclerView.Adapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
-        val layoutInflater = LayoutInflater.from(parent?.context)
+        val layoutInflater = LayoutInflater.from(parent.context)
         val row = layoutInflater.inflate(R.layout.row, parent, false)
         return CustomViewHolder(row)
     }
@@ -32,37 +32,39 @@ class RecyclerViewAdapter(private val bookList: List<Any>): RecyclerView.Adapter
         val authors: String?
         val coverThumb: String?
 
-        if (book is Book) {
-            holder?.book = book  // public accessible book
-            title = book.volumeInfo.title
-            authors = listStringToString(book.volumeInfo.authors)
-            coverThumb = if (book.volumeInfo.imageLinks != null) {  // handle missing thumbnails, causing frequent crashes
-                book.volumeInfo.imageLinks.smallThumbnail
-            } else ""
-        }
-        else if (book is BookEntity) {
-            holder?.book = book
-            title = book.title
-            authors = book.authors
-            coverThumb = if (book.thumbnailURL != null) {  // handle missing thumbnails, causing frequent crashes
-                book.thumbnailURL
-            } else ""
+        when (book) {
+            is Book -> {
+                holder.book = book  // public accessible book
+                title = book.volumeInfo.title
+                authors = listStringToString(book.volumeInfo.authors)
+                coverThumb = if (book.volumeInfo.imageLinks != null) {  // handle missing thumbnails, causing frequent crashes
+                    book.volumeInfo.imageLinks.smallThumbnail
+                } else ""
+            }
+            is BookEntity -> {
+                holder.book = book
+                title = book.title
+                authors = book.authors
+                coverThumb = if (book.thumbnailURL != null) {  // handle missing thumbnails, causing frequent crashes
+                    book.thumbnailURL
+                } else ""
 
+            }
+            else -> {
+                title = ""
+                authors = ""
+                coverThumb = ""
+            }
         }
-        else {
-            title = ""
-            authors = ""
-            coverThumb = ""
-        }
-        val coverView = holder?.v?.cover
+        val coverView = holder.v.cover
         try {
             Picasso.get().load(coverThumb+Math.random()).into(coverView) }  // Randomness to refresh (wow!)
         catch (e: IllegalArgumentException) {
             println("Image path is probably empty. A placeholder will be used instead.")
         }
-        holder?.v?.title?.text = title
-        holder?.v?.author?.text = authors
-        holder?.v?.cover?.setImageResource(R.drawable.sample_cover)
+        holder.v.title?.text = title
+        holder.v.author?.text = authors
+        holder.v.cover?.setImageResource(R.drawable.sample_cover)
     }
 }
 

@@ -41,7 +41,7 @@ class ViewBookDetailsActivity : AppCompatActivity() {
         book_publisher.text = publisher
         book_year.text = publishedDate
         if (thumbnailURL != "") {
-            try {   // TODO: issue #31
+            try {
                 Picasso.get().load(thumbnailURL).into(book_cover)
             } catch (e: IllegalArgumentException) {
                 println("Image path is probably empty. A placeholder will be used instead.")
