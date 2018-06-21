@@ -2,15 +2,13 @@ package com.example.harisont.librery
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_view_book_details.*
 import kotlin.concurrent.thread
 import android.widget.TextView
-import android.R.drawable.edit_text
-import android.widget.EditText
-
+import com.example.harisont.librery.db.AppDB
+import com.example.harisont.librery.db.BookEntity
 
 
 class ViewBookDetailsActivity : AppCompatActivity() {
