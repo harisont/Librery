@@ -14,7 +14,7 @@ interface BookDAO {
     @Delete
     fun deleteBookData(book: BookEntity)
 
-    @Query("SELECT * FROM BookEntity WHERE read = :read")   // TODO: just select data shown in RecyclerView
+    @Query("SELECT * FROM BookEntity WHERE read = :read ORDER BY authors")   // TODO: just select data shown in RecyclerView
     fun selectBookList(read: Boolean): List<BookEntity>
 
     @Query("SELECT * from BookEntity WHERE id = :id")

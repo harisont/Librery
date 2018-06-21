@@ -22,8 +22,22 @@ class MainActivityFragment: Fragment() {
         thread {
             val bookList = db?.bookDAO()?.selectBookList(read)
             if (bookList != null)
-                recycler_view.adapter = RecyclerViewAdapter(bookList)
+                activity!!.runOnUiThread {
+                    recycler_view.adapter = RecyclerViewAdapter(bookList)
+                }
         }
         return layout
+    }
+
+    override fun onResume() {  
+        super.onResume()
+        thread {
+            val read = arguments!!.getBoolean("read")
+            val bookList = db?.bookDAO()?.selectBookList(read)
+            if (bookList != null)
+                activity!!.runOnUiThread {
+                    recycler_view.adapter = RecyclerViewAdapter(bookList)
+                }
+        }
     }
 }
