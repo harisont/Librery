@@ -84,7 +84,7 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                         Toast.makeText(this, R.string.deleted, Toast.LENGTH_LONG).show()
                     }
                 }
-                else {  // TODO: check why is not functioning
+                else {
                     runOnUiThread {
                         Toast.makeText(this, R.string.not_in_db, Toast.LENGTH_LONG).show()
                     }

@@ -22,9 +22,8 @@ class MainActivityFragment: Fragment() {
         thread {
             val bookList = db?.bookDAO()?.selectBookList(read)
             if (bookList != null)
-                recycler_view.adapter = RecyclerViewAdapter(bookList)   // TODO: in UI thread
+                recycler_view.adapter = RecyclerViewAdapter(bookList)
         }
         return layout
     }
-
 }

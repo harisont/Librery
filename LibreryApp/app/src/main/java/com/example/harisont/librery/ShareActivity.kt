@@ -5,6 +5,13 @@ import android.os.Bundle
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_share.*
 import kotlinx.android.synthetic.main.activity_view_book_details.*
+import android.os.AsyncTask.execute
+import okhttp3.OkHttpClient
+import okhttp3.FormBody
+import okhttp3.Request
+import okhttp3.RequestBody
+import kotlin.concurrent.thread
+
 
 class ShareActivity : AppCompatActivity() {
 
@@ -19,5 +26,27 @@ class ShareActivity : AppCompatActivity() {
 
         pub_rating_bar.rating = defRating
         pub_notes.setText(defNotes, TextView.BufferType.EDITABLE)
+
+        val url = "http://anonimalettori.altervista.org/db/insert.php"
+
+        post_button.setOnClickListener {
+            val formBody = FormBody.Builder()
+                    .add("libro", id)
+                    //.add("commento", pub_notes.text.toString())
+                    //.add("valutazione", pub_rating_bar.rating.toString())
+                    .build()
+            println("PARAMETRI: ${formBody.value(0)}")
+            thread {
+                val client = OkHttpClient()
+                val request = Request.Builder()
+                        .url(url)
+                        .post(formBody)
+                        .build()
+                println("RICHIESTA: $request")
+
+                val response = client.newCall(request).execute()
+                println("RESPONSO: "+response.body()?.string())
+            }
+        }
     }
 }
