@@ -1,6 +1,6 @@
 package com.example.harisont.librery
 
-// CLASSES USED TO PARSE JSON
+// CLASSES USED JUST TO PARSE JSON WITH GSON
 
 class SearchResults(val items: List<Book>)
 
