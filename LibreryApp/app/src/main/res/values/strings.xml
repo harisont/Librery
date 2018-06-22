@@ -26,6 +26,7 @@
     <string name="deleted">This book was removed from your local databases.</string>
     <string name="added">Your changes have been saved.</string>
     <string name="post_failure">Sorry, something\'s wrong.</string>
+    <string name="posted">Posted successfully!</string>
 
     <!--hints-->
     <string name="hint_title">Title</string>

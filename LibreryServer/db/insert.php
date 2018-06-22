@@ -15,9 +15,6 @@ if(isset($_POST['libro'])){
 		//Bind parameters
 		$stmt->bind_param("ssd",$book,$comment,$rating);
 		// Executing MySQL statement
-		echo $book;
-		echo $comment;
-		echo $rating;
 		$stmt->execute();
 		// Check if data got inserted
 		if($stmt->affected_rows == 1){

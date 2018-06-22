@@ -45,7 +45,15 @@ class ShareActivity : AppCompatActivity() {
                         override fun onResponse(call: Call?, response: Response?) {
                             val json = response?.body()?.string()
                             println("Works like a charm!")
-                            // TODO: parse JSON
+                            val gson = GsonBuilder().create()
+                            val parsedJson = gson.fromJson(json, JsonResponse::class.java)
+                            if(parsedJson.success==1)
+                                runOnUiThread {
+                                    Toast.makeText(this@ShareActivity, getString(R.string.posted),Toast.LENGTH_LONG).show()
+                                }
+                            else runOnUiThread {
+                                Toast.makeText(this@ShareActivity, getString(R.string.post_failure), Toast.LENGTH_LONG).show()
+                            }
                         }
 
                         override fun onFailure(call: Call?, e: IOException?) {

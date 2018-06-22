@@ -16,4 +16,4 @@ class VolumeInfo(val title: String,
 class ImageLinks(val smallThumbnail: String)
 
 
-class Response(val success: Boolean)
+class JsonResponse(val success: Int)
