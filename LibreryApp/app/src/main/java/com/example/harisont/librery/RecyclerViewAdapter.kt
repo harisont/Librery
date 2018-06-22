@@ -2,12 +2,11 @@ package com.example.harisont.librery
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import com.example.harisont.librery.db.BookEntity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row.view.*
 
@@ -22,7 +21,7 @@ class RecyclerViewAdapter(private val bookList: List<Any>): RecyclerView.Adapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
-        val layoutInflater = LayoutInflater.from(parent?.context)
+        val layoutInflater = LayoutInflater.from(parent.context)
         val row = layoutInflater.inflate(R.layout.row, parent, false)
         return CustomViewHolder(row)
     }
@@ -33,37 +32,39 @@ class RecyclerViewAdapter(private val bookList: List<Any>): RecyclerView.Adapter
         val authors: String?
         val coverThumb: String?
 
-        if (book is Book) {
-            holder?.book = book  // public accessible book
-            title = book.volumeInfo.title
-            authors = listStringToString(book.volumeInfo.authors)
-            coverThumb = if (book.volumeInfo.imageLinks != null) {  // handle missing thumbnails, causing frequent crashes
-                book.volumeInfo.imageLinks.smallThumbnail
-            } else ""
-        }
-        else if (book is BookEntity) {
-            holder?.book = book
-            title = book.title
-            authors = book.authors
-            coverThumb = if (book.thumbnailURL != null) {  // handle missing thumbnails, causing frequent crashes
-                book.thumbnailURL
-            } else ""
+        when (book) {
+            is Book -> {
+                holder.book = book  // public accessible book
+                title = book.volumeInfo.title
+                authors = listStringToString(book.volumeInfo.authors)
+                coverThumb = if (book.volumeInfo.imageLinks != null) {  // handle missing thumbnails
+                    book.volumeInfo.imageLinks.smallThumbnail
+                } else ""
+            }
+            is BookEntity -> {
+                holder.book = book
+                title = book.title
+                authors = book.authors
+                coverThumb = if (book.thumbnailURL != null) {  // handle missing thumbnails
+                    book.thumbnailURL
+                } else ""
 
+            }
+            else -> {
+                title = ""
+                authors = ""
+                coverThumb = ""
+            }
         }
-        else {
-            title = ""
-            authors = ""
-            coverThumb = ""
-        }
-        val coverView = holder?.v?.cover
+        val coverView = holder.v.cover
         try {
-            Picasso.get().load(coverThumb+Math.random()).into(coverView) }  // Randomness to refresh (wow!)
+            Picasso.get().load(coverThumb+Math.random()).into(coverView) }  // some randomness to refresh images (wow!)
         catch (e: IllegalArgumentException) {
             println("Image path is probably empty. A placeholder will be used instead.")
         }
-        holder?.v?.title?.text = title
-        holder?.v?.author?.text = authors
-        holder?.v?.cover?.setImageResource(R.drawable.sample_cover)
+        holder.v.title?.text = title
+        holder.v.author?.text = authors
+        holder.v.cover?.setImageResource(R.drawable.sample_cover)
     }
 }
 

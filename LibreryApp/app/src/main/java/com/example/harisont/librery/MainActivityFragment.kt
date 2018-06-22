@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.harisont.librery.db.AppDB
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlin.concurrent.thread
@@ -22,9 +23,22 @@ class MainActivityFragment: Fragment() {
         thread {
             val bookList = db?.bookDAO()?.selectBookList(read)
             if (bookList != null)
-                recycler_view.adapter = RecyclerViewAdapter(bookList)   // TODO: in UI thread
+                activity!!.runOnUiThread {
+                    recycler_view.adapter = RecyclerViewAdapter(bookList)
+                }
         }
         return layout
     }
 
+    override fun onResume() {  
+        super.onResume()
+        thread {
+            val read = arguments!!.getBoolean("read")
+            val bookList = db?.bookDAO()?.selectBookList(read)
+            if (bookList != null)
+                activity!!.runOnUiThread {
+                    recycler_view.adapter = RecyclerViewAdapter(bookList)
+                }
+        }
+    }
 }
