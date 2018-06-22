@@ -29,8 +29,8 @@ class ShareActivity : AppCompatActivity() {
         post_button.setOnClickListener {
             val formBody = FormBody.Builder()
                     .add("libro", id)
-                    //.add("commento", pub_notes.text.toString())
-                    //.add("valutazione", pub_rating_bar.rating.toString())
+                    .add("commento", pub_notes.text.toString())
+                    .add("valutazione", pub_rating_bar.rating.toString())
                     .build()
             println("PARAMETRI: ${formBody.value(0)}")
             thread {

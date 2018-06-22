@@ -37,7 +37,7 @@ class RecyclerViewAdapter(private val bookList: List<Any>): RecyclerView.Adapter
                 holder.book = book  // public accessible book
                 title = book.volumeInfo.title
                 authors = listStringToString(book.volumeInfo.authors)
-                coverThumb = if (book.volumeInfo.imageLinks != null) {  // handle missing thumbnails, causing frequent crashes
+                coverThumb = if (book.volumeInfo.imageLinks != null) {  // handle missing thumbnails
                     book.volumeInfo.imageLinks.smallThumbnail
                 } else ""
             }
@@ -45,7 +45,7 @@ class RecyclerViewAdapter(private val bookList: List<Any>): RecyclerView.Adapter
                 holder.book = book
                 title = book.title
                 authors = book.authors
-                coverThumb = if (book.thumbnailURL != null) {  // handle missing thumbnails, causing frequent crashes
+                coverThumb = if (book.thumbnailURL != null) {  // handle missing thumbnails
                     book.thumbnailURL
                 } else ""
 
@@ -58,7 +58,7 @@ class RecyclerViewAdapter(private val bookList: List<Any>): RecyclerView.Adapter
         }
         val coverView = holder.v.cover
         try {
-            Picasso.get().load(coverThumb+Math.random()).into(coverView) }  // Randomness to refresh (wow!)
+            Picasso.get().load(coverThumb+Math.random()).into(coverView) }  // some randomness to refresh images (wow!)
         catch (e: IllegalArgumentException) {
             println("Image path is probably empty. A placeholder will be used instead.")
         }
