@@ -10,9 +10,14 @@ if(isset($_GET['libro'])){
 	$query = "INSERT INTO consigli(libro, commento, valutazione) VALUES (?,?,?)";
 	//Prepare the query
 	if($stmt = $con->prepare($query)){
+		$comment = $_GET['commento'];
+		$rating = $_GET['valutazione'];
 		//Bind parameters
-		$stmt->bind_param("ssis",$book,$_GET['commento'],$_GET['valutazione']);
+		$stmt->bind_param("ssd",$book,$comment,$rating);
 		// Executing MySQL statement
+		echo $book;
+		echo $comment;
+		echo $rating;
 		$stmt->execute();
 		sleep(1);
 		// Check if data got inserted
