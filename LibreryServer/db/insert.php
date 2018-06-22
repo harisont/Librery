@@ -3,16 +3,21 @@ include 'db_connect.php';
 $response = array();
  
 // Check mandatory parameters
-if(isset($_POST['libro'])){
-	$book = $_POST['libro'];
+if(isset($_GET['libro'])){
+	$book = $_GET['libro'];
 	
 	//Query (prep statement)
 	$query = "INSERT INTO consigli(libro, commento, valutazione) VALUES (?,?,?)";
 	//Prepare the query
 	if($stmt = $con->prepare($query)){
+		$comment = $_GET['commento'];
+		$rating = $_GET['valutazione'];
 		//Bind parameters
-		$stmt->bind_param("ssis",$book,$_POST['commento'],$_POST['valutazione']);
+		$stmt->bind_param("ssd",$book,$comment,$rating);
 		// Executing MySQL statement
+		echo $book;
+		echo $comment;
+		echo $rating;
 		$stmt->execute();
 		// Check if data got inserted
 		if($stmt->affected_rows == 1){
