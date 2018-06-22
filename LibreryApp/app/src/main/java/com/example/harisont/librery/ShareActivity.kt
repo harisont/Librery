@@ -4,12 +4,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_share.*
-import kotlinx.android.synthetic.main.activity_view_book_details.*
-import android.os.AsyncTask.execute
 import okhttp3.OkHttpClient
 import okhttp3.FormBody
 import okhttp3.Request
-import okhttp3.RequestBody
 import kotlin.concurrent.thread
 
 
@@ -32,8 +29,8 @@ class ShareActivity : AppCompatActivity() {
         post_button.setOnClickListener {
             val formBody = FormBody.Builder()
                     .add("libro", id)
-                    //.add("commento", pub_notes.text.toString())
-                    //.add("valutazione", pub_rating_bar.rating.toString())
+                    .add("commento", pub_notes.text.toString())
+                    .add("valutazione", pub_rating_bar.rating.toString())
                     .build()
             println("PARAMETRI: ${formBody.value(0)}")
             thread {

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_search.*
 import okhttp3.*
 import java.io.IOException
@@ -17,7 +16,7 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         search_button.setOnClickListener {
-            val json = advancedSearch(
+             advancedSearch(
                     search_by_isbn.text.toString(),
                     search_by_title.text.toString(),
                     search_by_author.text.toString(),
@@ -60,7 +59,7 @@ class SearchActivity : AppCompatActivity() {
         }
         else {
             val url = "https://www.googleapis.com/books/v1/volumes/?" +
-                    "$searchParameters" +
+                    searchParameters +
                     "&projection=lite"
             println("URL: $url")
             fetchBooks(url)

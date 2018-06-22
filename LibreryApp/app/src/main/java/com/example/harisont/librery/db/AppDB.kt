@@ -1,4 +1,4 @@
-package com.example.harisont.librery
+package com.example.harisont.librery.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
