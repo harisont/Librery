@@ -3,15 +3,15 @@ include 'db_connect.php';
 $response = array();
  
 // Check mandatory parameters
-if(isset($_GET['libro'])){
-	$book = $_GET['libro'];
+if(isset($_POST['libro'])){
+	$book = $_POST['libro'];
 	
 	//Query (prep statement)
 	$query = "INSERT INTO consigli(libro, commento, valutazione) VALUES (?,?,?)";
 	//Prepare the query
 	if($stmt = $con->prepare($query)){
-		$comment = $_GET['commento'];
-		$rating = $_GET['valutazione'];
+		$comment = $_POST['commento'];
+		$rating = $_POST['valutazione'];
 		//Bind parameters
 		$stmt->bind_param("ssd",$book,$comment,$rating);
 		// Executing MySQL statement

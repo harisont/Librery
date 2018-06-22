@@ -14,3 +14,6 @@ class VolumeInfo(val title: String,
                  val imageLinks:ImageLinks)
 
 class ImageLinks(val smallThumbnail: String)
+
+
+class Response(val success: Boolean)
