@@ -13,7 +13,7 @@ if(isset($_GET['libro'])){
 		$comment = $_GET['commento'];
 		$rating = $_GET['valutazione'];
 		//Bind parameters
-		$stmt->bind_param("ssis",$book,$comment,$rating);
+		$stmt->bind_param("ssd",$book,$comment,$rating);
 		// Executing MySQL statement
 		echo $book;
 		echo $comment;
