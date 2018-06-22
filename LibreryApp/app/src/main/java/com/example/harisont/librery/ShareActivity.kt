@@ -1,12 +1,14 @@
 package com.example.harisont.librery
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_share.*
-import okhttp3.OkHttpClient
-import okhttp3.FormBody
-import okhttp3.Request
+import okhttp3.*
+import java.io.IOException
 import kotlin.concurrent.thread
 
 
@@ -32,18 +34,29 @@ class ShareActivity : AppCompatActivity() {
                     .add("commento", pub_notes.text.toString())
                     .add("valutazione", pub_rating_bar.rating.toString())
                     .build()
-            println("PARAMETRI: ${formBody.value(0)}")
-            thread {
-                val client = OkHttpClient()
-                val request = Request.Builder()
-                        .url(url)
-                        .post(formBody)
-                        .build()
-                println("RICHIESTA: $request")
+            val client = OkHttpClient()
+            val request = Request.Builder()
+                    .url(url)
+                    .post(formBody)
+                    .build()
+            if (CheckNetworkStatus.isNetworkAvailable(this)) {
+                thread {
+                    client.newCall(request).enqueue(object : Callback {  // cannot use .execute() in the UI thread
+                        override fun onResponse(call: Call?, response: Response?) {
+                            val json = response?.body()?.string()
+                            println("Works like a charm!")
+                            // TODO: parse JSON
+                        }
 
-                val response = client.newCall(request).execute()
-                println("RESPONSO: "+response.body()?.string())
-            }
+                        override fun onFailure(call: Call?, e: IOException?) {
+                            println("Epic fail!")
+                            runOnUiThread {
+                                Toast.makeText(this@ShareActivity, getString(R.string.post_failure), Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    })
+                }
+            } else Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_LONG).show()
         }
     }
 }
