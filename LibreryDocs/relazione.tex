@@ -24,32 +24,30 @@
 \tableofcontents
 \newpage
 \section{Introduzione}
-Librery è un'applicazione Android completamente libera ed open source volta alla gestione delle proprie letture. Essa permette di effettuare ricerche nel più grande indice di testi integrali esistente tramite le API RESTful di Google Libri e di salvare localmente i dati relativi ai libri letti o che s'intende leggere. L'utente può aggiungere delle annotazioni e la propria valutazione ai libri letti e, grazie ad un servizio web anch'esso realizzato nell'ambito del progetto Librery, collaborare al mantenimanto di uno proprio "scaffale" pubblico online volto a condividere con altri bibliofili i propri libri preferiti.
+Librery è un'applicazione Android completamente libera ed open source volta alla gestione delle proprie letture. Essa permette di effettuare ricerche nel più grande indice di testi integrali esistente tramite le API RESTful di Google Libri e di salvare localmente i dati relativi ai libri letti o che s'intende leggere. L'utente può aggiungere delle annotazioni e la propria valutazione ai libri letti e, grazie ad un servizio web anch'esso realizzato nell'ambito del progetto Librery, collaborare al mantenimento di uno proprio "scaffale" pubblico online volto a condividere con altri bibliofili i propri libri preferiti.
 	\subsection{Casi d'uso}
 	Tutte le sopra citate funzionalità - ed altre - sono presenti in Google Libri, che è ormai non solo un motore di ricerca specializzato, ma un servizio web complesso e articolato, collegato agli account Google dei propri utenti e disponibile anche come app Android. \newline
-	Librery, che effettua solamente richieste di dati pubblici a Google Libri e che dunque non necessita affatto di un account, vuole proporsi come una più semplice ma valida alternativa per quanti preferiscono avere la possibilità di mantenere un certo grado di riservatezza sui propri dati personali, eventualmente indicando in modo esplicito quali informazioni vadano rese pubbliche.
+	Librery, che effettua solamente richieste di dati pubblici a Google Libri e che dunque non necessita affatto di un account, vuole proporsi come una più semplice ma valida alternativa per quanti preferiscono avere la possibilità di mantenere un certo grado di riservatezza sui propri dati personali, eventualmente indicando in modo esplicito quali informazioni vadano rese pubbliche, sotto forma di consigli di lettura, sul sito web \url{anonimalettori.altervista.org}.
 \newpage
 \section{Architettura}
-L'architettura di Librery è piuttosto semplice, ma inusuale. 
-Il dispositivo Android è client di due diversi server, uno di Google, al quale vengono effettuate le richieste JSON nel momento in cui si fa una ricerca, l'altro realizzato nell'ambito del progetto Librery e hostato su Altervista, volto a gestire i dati pubblici inviati dagli utenti a partire dal proprio database locale.
+La particolarità dell'architettura di Librery è che il dispositivo Android è client di due diversi server, uno di Google, al quale vengono effettuate le richieste JSON nel momento in cui si fa una ricerca, l'altro realizzato nell'ambito del progetto Librery e hostato su Altervista, volto a gestire i dati pubblici inviati dagli utenti.
 \image[diagram.png][scale=0.7]{Architettura del progetto Librery}
-Nelle sezioni successive verranno descritti approfonditamente il client ed il server Librery online.
+Nelle sezioni successive verranno descritti approfonditamente il client ed il server realizzato appositamente per questo progetto.
 \newpage
 \section{Il client: l'app Android}
-In questa sezione si è scelto di concentrare l'attenzione sugli aspetti del client realizzato che hanno a che vedere con l'uso delle API di Google Libri e, più in generale, con i vari aspetti del networking, accennando solo in maniera molto breve alle soluzioni proposte per quel che riguarda la realizzazione dell'interfaccia utente e del database locale.
+In questa sezione si è scelto di concentrare l'attenzione sugli aspetti del client realizzato che hanno a che vedere con la comunicazione con i due server, riservando solo qualche parola alle soluzioni adottate per quel che riguarda la realizzazione dell'interfaccia utente e del database locale.
 	\subsection{Visione d'insieme}
-	Per la realizzazione dell'applicativo si è scelto il linguaggio Kotlin, totalmente interoperabile con Java e ormai ufficialmente supportato nel mondo Android, anche all'interno di Android Studio. La scelta è dovuta alla peculiare brevità e alla leggibilità del codice Kotlin ed ha permesso di sviluppare l'applicazione in tempi relativamente brevi.\newline
-	Il database locale è realizzato non direttamente in SQLite ma, come raccomandato nella documentazione ufficiale di Android, mediante la libreria Room Persistence.
-	%? Aggiornare activity a lavoro finito
-	A livello di interfaccia utente, l'app è composta da quattro activity:
-	\begin{itemize}
-		\item \code{MainActivity}: schermata composta di due \code{Fragment} in cui è possibile visualizzare, sotto forma di \code{RecyclerView}, l'elenco dei libri letti e l'elenco dei libri da leggere, ossia i risultati di due diverse interrogazioni del database locale;
-		\item \code{SearchActivity}: schermata tramite la quale l'utente può effettuare ricerche in Google Libri. Il risultato è una stringa in formato JSON, che per semplicità viene passata come tale a \code{SearchResultsActivity};
-		\item \code{SearchResultsActivity}: qui avviene il parsing del JSON ottenuto in risposta dai server di Google Books ed i risultati vengono visualizzati in una \code{RecyclerView} del tutto analoga a quella impiegata in \code{MainActiviy};
-		\item \code{ViewBookDetailsActivity}: permette di visualizzare i dettagli di un libro selezionato da una \code{RecyclerView}, modificarne alcuni attributi, ad esempio la valutazione, e salvarli localmente e/o online;
-		\item \code{ShareActivity}: permette di pubblicare le informazioni relative ad un libro.
-		%? immagini schermate d'interesse 
-	\end{itemize}
+	Per la realizzazione dell'applicativo si è scelto il linguaggio Kotlin, totalmente interoperabile con Java e ormai ufficialmente supportato nel mondo Android, anche all'interno di Android Studio. La scelta è dovuta alle possibilità che Kotlin offre in termini di compattezza e leggibilità del codice ed ha permesso di sviluppare l'applicazione in tempi relativamente brevi.\newline
+	Il database locale è realizzato non direttamente in SQLite ma, come raccomandato nella più recente documentazione ufficiale di Android, mediante la libreria Room Persistence.
+	A livello di interfaccia utente, l'app è composta da cinque activity:
+	\begin{enumerate}
+		\item \code{MainActivity}: schermata composta di due \code{Fragment} in cui è possibile visualizzare, all'interno di una \code{RecyclerView}, l'elenco dei libri letti e quello dei libri da leggere, ossia i risultati di due diverse interrogazioni al database locale, eseguite ogniqualvolta la schermata ritorna attiva;
+		\item \code{SearchActivity}: schermata tramite la quale l'utente può effettuare ricerche in Google Libri. Il risultato è una stringa in formato JSON che, per semplificare la comunicazione tra le activity, viene passata come tale a \code{SearchResultsActivity};
+		\item \code{SearchResultsActivity}: qui avviene il parsing del JSON ottenuto in risposta dai server di Google Books ed i risultati vengono visualizzati in una \code{RecyclerView}, a livello di layout, a quelle impiegate in \code{MainActiviy};
+		\item \code{ViewBookDetailsActivity}: permette di visualizzare i dettagli di un libro selezionato da una \code{RecyclerView}, modificarne alcuni attributi, ad esempio la valutazione, e salvarli localmente. Tramite un \code{Button} evidenziato in rosso è possibile inoltre accedere all'activity volta alla condivisione del libro online;
+		\item \code{ShareActivity}: permette di pubblicare in forma anonima le informazioni relative ad un libro. In particolare, presenta una \code{RatingBar} ed una \code{EditText}, contenenti per default la valutazione e la recensione provenienti da \code{ViewBookDetailsActivity}. I campi sono modificabili, in modo da permettere all'utente di differenziare dati pubblici e dati privati a piacimento.
+		\image[acts.png][scale=0.066]{Activity dell'app Android}
+	\end{enumerate}
 	% room persistence database
 	\subsection{Utilizzo delle API di Google Books}
 	\subsection{Librerie}
