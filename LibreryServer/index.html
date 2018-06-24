@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <p id="demo"></p>
+<script>
+    var yourJSONObject = {} // will later be filled with the data
+    var req = new XMLHttpRequest();
+    req.open('GET', 'db/results.json', true); 
+    req.onreadystatechange = function (aEvt) {
+    if (req.readyState == 4) {
+        yourJSONObject = JSON.parse(req.responseText);
+    }
+    console.log(yourJSONObject)
+};
+req.send(null); 
+</script>
+
+</body>
+</html>
