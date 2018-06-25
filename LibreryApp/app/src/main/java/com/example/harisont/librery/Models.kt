@@ -16,4 +16,11 @@ class VolumeInfo(val title: String,
 class ImageLinks(val smallThumbnail: String)
 
 
-class JsonResponse(val success: Int)
+class InsertResponse(val success: Int)
+
+
+class Recommendations(val success: Int, val data: List<Recommendation>)
+
+class Recommendation(val libro: String,
+                     val commento: String,
+                     val valutazione: Float)
