@@ -19,7 +19,7 @@ class ImageLinks(val smallThumbnail: String)
 class InsertResponse(val success: Int)
 
 
-class Recommendations(val data: List<Recommendation>)
+class Recommendations(val success: Int, val data: List<Recommendation>)
 
 class Recommendation(val libro: String,
                      val commento: String,
