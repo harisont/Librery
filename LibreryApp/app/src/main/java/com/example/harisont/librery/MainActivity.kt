@@ -13,9 +13,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.harisont.librery.db.AppDB
 
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.*
+import java.io.IOException
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
@@ -68,7 +72,10 @@ class MainActivity : AppCompatActivity() {
         val id = item.itemId
 
         if (id == R.id.action_settings) {
-            recreate()
+            thread {
+
+            }
+            startActivity(Intent(this, RecommendationsActivity::class.java))
             return true
         }
         return super.onOptionsItemSelected(item)

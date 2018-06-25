@@ -46,7 +46,7 @@ class ShareActivity : AppCompatActivity() {
                             val json = response?.body()?.string()
                             println("Works like a charm!")
                             val gson = GsonBuilder().create()
-                            val parsedJson = gson.fromJson(json, JsonResponse::class.java)
+                            val parsedJson = gson.fromJson(json, InsertResponse::class.java)
                             if(parsedJson.success==1)
                                 runOnUiThread {
                                     Toast.makeText(this@ShareActivity, getString(R.string.posted),Toast.LENGTH_LONG).show()

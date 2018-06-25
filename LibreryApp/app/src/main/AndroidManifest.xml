@@ -35,9 +35,13 @@
             android:name=".SearchResultsActivity"
             android:label="@string/search_res_label"
             android:screenOrientation="portrait" />
-        <activity android:name=".ShareActivity"
+        <activity
+            android:name=".ShareActivity"
             android:label="@string/share_label"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".RecommendationsActivity"
+            android:label="@string/rec_label" />
     </application>
 
 </manifest>
