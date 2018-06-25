@@ -29,8 +29,6 @@ if($stmt = $con->prepare($query)) {
 	$response["message"] = mysqli_error($con);	
 }
 
-// Generate JSON file
-$fp = fopen('results.json', 'w');
-fwrite($fp, json_encode($response));
-fclose($fp);
+// Display JSON response 
+echo json_encode($response); 
 ?>
