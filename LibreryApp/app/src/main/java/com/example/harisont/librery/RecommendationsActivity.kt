@@ -1,14 +1,19 @@
 package com.example.harisont.librery
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.example.harisont.librery.db.BookEntity
 import com.google.gson.GsonBuilder
-import okhttp3.*
-import java.io.IOException
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlin.concurrent.thread
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import android.os.AsyncTask.execute
+
+
+
 
 class RecommendationsActivity : AppCompatActivity() {
 
@@ -18,50 +23,48 @@ class RecommendationsActivity : AppCompatActivity() {
         println("JSON from anonimalettori: $json")
         val gson = GsonBuilder().create()
         val recommendationsJson = gson.fromJson(json, Recommendations::class.java)
-        if (recommendationsJson.success == 1 && CheckNetworkStatus.isNetworkAvailable(this)) {
+        thread {
             var recommendedBooks = mutableListOf<BookEntity>()
-            for (rec in recommendationsJson.data) {
-                val bookInfo = lookForBook(rec.libro)
-                recommendedBooks.add(BookEntity(
-                        rec.libro, // TODO: change constructor parameters
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        false,
-                        rec.valutazione,
-                        rec.commento))
+            if (recommendationsJson.success == 1 && CheckNetworkStatus.isNetworkAvailable(this)) {
+                for (rec in recommendationsJson.data) {
+                    val bookInfoFromGoogle = lookForBook(rec.libro)
+                    if (bookInfoFromGoogle != null) {
+                        recommendedBooks.add(BookEntity(
+                                rec.libro,
+                                bookInfoFromGoogle.volumeInfo.title,
+                                bookInfoFromGoogle.volumeInfo.authors[0],   // TODO: join all authors to string (fun)
+                                bookInfoFromGoogle.volumeInfo.publisher,
+                                bookInfoFromGoogle.volumeInfo.publishedDate,
+                                bookInfoFromGoogle.volumeInfo.imageLinks.smallThumbnail,
+                                false,
+                                rec.valutazione,
+                                rec.commento))
+                    }
+                }
+            } else {
+                runOnUiThread {
+                    Toast.makeText(this, R.string.not_connected, Toast.LENGTH_LONG).show()
+                }
             }
-        } else Toast.makeText(this, R.string.not_connected, Toast.LENGTH_LONG).show()
-        // TODO: setContentView(R.layout.fragment_main)
-        // TODO: pass book list to adapter (maybe cast mutable list to list?) like SearchResultsActivity
+            runOnUiThread {
+                setContentView(R.layout.fragment_main)
+                recycler_view.layoutManager = LinearLayoutManager(this)
+                if (recommendedBooks.size == 0) {
+                    Toast.makeText(this@RecommendationsActivity, R.string.no_matching_data, Toast.LENGTH_LONG).show()
+                    finish()
+                } else
+                    recycler_view.adapter = RecyclerViewAdapter(recommendedBooks)
+            }
+        }
     }
 
     private fun lookForBook(id: String): Book? {
         val url = "https://www.googleapis.com/books/v1/volumes/$id"
-        var parsedBook: Book? // TODO: fix!
-        parsedBook = null
-        if (CheckNetworkStatus.isNetworkAvailable(this)) {
-            val client = OkHttpClient()
-            val req = Request.Builder().url(url).build()
-            thread {
-                client.newCall(req).enqueue(object : Callback {  // cannot use .execute() in the UI thread
-                    override fun onResponse(call: Call?, response: Response?) {
-                        val json = response?.body()?.string()
-                        println("Works like a charm!")
-                        val gson = GsonBuilder().create()
-                        parsedBook = gson.fromJson(json, Book::class.java)
-                    }
-                    override fun onFailure(call: Call?, e: IOException?) {
-                        println("Epic fail!")
-                        runOnUiThread {
-                            Toast.makeText(this@RecommendationsActivity, getString(R.string.query_failure), Toast.LENGTH_LONG).show()
-                        }
-                    }
-                })
-            }
-        } else Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_LONG).show()
-        return parsedBook
+        val client = OkHttpClient()
+        val req = Request.Builder().url(url).build()
+        val res = client.newCall(req).execute()
+        val json = res.body()?.string()
+        val gson = GsonBuilder().create()
+        return gson.fromJson(json, Book::class.java)
     }
 }
