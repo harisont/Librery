@@ -41,7 +41,7 @@ class ShareActivity : AppCompatActivity() {
                     .build()
             if (CheckNetworkStatus.isNetworkAvailable(this)) {
                 thread {
-                    client.newCall(request).enqueue(object : Callback {  // cannot use .execute() in the UI thread
+                    client.newCall(request).enqueue(object : Callback {
                         override fun onResponse(call: Call?, response: Response?) {
                             val json = response?.body()?.string()
                             println("Works like a charm!")
