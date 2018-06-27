@@ -2,6 +2,7 @@
 \documentclass{beamer}
 \logo{\includegraphics[height=0.8cm]{logo.png}\vspace{239pt}}
 \usetheme{mhthm}
+\graphicspath{{./images/}}
 \title{Libre\textcolor{ProgBarBGColor}{ry}}
 \subtitle{Un'app Android per gestire le proprie letture}
 \author{Arianna Masciolini}
@@ -13,25 +14,89 @@
 	\setcounter{showProgressBar}{0}
 	\setcounter{showSlideNumbers}{0}
 	\frame{\titlepage}
-	\begin{frame}
-		\frametitle{Contenuti}
-		\begin{enumerate}
-			\item Obiettivi
-			\item Utilizzo delle API REST di Google Books
-			\item Librerie utilizzate
-			\begin{itemize}
-				\item OkHTTP
-				\item Gson
-			\end{itemize}
-		\end{enumerate}
-	\end{frame}
 	\setcounter{framenumber}{0}
 	\setcounter{showProgressBar}{1}
 	\setcounter{showSlideNumbers}{1}
-	\section{Obiettivi}
+	\section{Intro}
 	\begin{frame}
-		\frametitle{A frame}
+		\frametitle{Cos'è Librery}
+		\begin{itemize}
+			\item Applicazione Android per gestione di libri
+			\item Funzionalità:
+			\begin{itemize}
+				\item Ricerca avanzata in Google Libri
+				\item Salvataggio dati personali su database locale
+				\item Possibilità di condivisione di consigli di lettura con gli altri utenti di Librery
+			\end{itemize}
+		\item Attenzione alla privacy: 
+		\begin{itemize}
+			\item Non è necessario un account Google
+			\item Possibilità di diversificare dati privati ed eventuali dati pubblici
+		\end{itemize}
+		\end{itemize}
 	\end{frame}
-\section{Google Books API}
-\section{Librerie}
+	\begin{frame}
+		\frametitle{Architettura}
+		\image[diagram.png][scale=0.5]
+		Architettura del progetto Librery: un server e il client sono stati realizzati appositamente.
+	\end{frame}
+\section{Client}
+	\begin{frame}
+		\frametitle{Visione d'insieme}
+		\begin{itemize}
+			\item Kotlin
+			\item Database locale: \textbf{Room Persistence Library}
+			\item Utilizzo \textbf{API REST} di Google Libri
+			\item Scambio di oggetti \textbf{JSON}
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Librerie}
+		Librerie di terze parti:
+		\begin{itemize}
+			\item \textbf{OkHTTP}: client HTTP semplice ed efficiente
+			\item \textbf{Picasso}: caricamento immagini
+			\item \textbf{Gson}: parsing JSON
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Ricerca}
+		\image[search.png][scale=0.3]
+		Richiesta HTTP a Google Libri. Ricerca avanzata: \code{GET} con parametri specificati dall'utente tramite form.
+	\end{frame}
+	\begin{frame}
+		\frametitle{Pubblicazione consigli}
+		\image[share.png][scale=0.3]
+		Chiamata \code{POST} al server Librery Online. I parametri sono recuperati dal database locale, ma modificabili prima di effettuare la richiesta HTTP.
+	\end{frame}
+	\begin{frame}
+		\frametitle{Lista consigli}
+		\image[recomm.png][scale=0.08]
+		Dati recuperati in parte da Librery online, in parte da Google Libri tramite chiamate \code{GET}.
+	\end{frame}
+\section{Server}
+	\begin{frame}
+		\frametitle{Visione d'insieme}
+		\begin{itemize}
+			\item Hosting: Altervista
+			\item Database MySQL
+			\item Script in PHP per operazioni di \code{SELECT} ed \code{INSERT}
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Database \code{my\_anonimalettori}}
+		\image[struct.png][scale=0.15]
+		Struttura volutamente minimale del database MySQL: i dati relativi ai libri sono accessibili tramite un'altra chiamata REST tramite il loro id su Google Libri (campo \code{libro}).
+	\end{frame}
+	\begin{frame}
+		\frametitle{Script PHP}
+		\begin{itemize}
+			\item \code{db\_connect.php} contiene i parametri di connessione al database
+			\item \code{select\_all.php} per operazioni di \code{SELECT}
+			\item \code{insert.php} per inserimento di singoli record (consigli) nel database
+			\begin{itemize}
+				\item uso di \textbf{prepared statement} per evitare SQL injection
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
 \end{document}
