@@ -1,5 +1,5 @@
 % !TeX spellcheck = IT
-\documentclass[a4paper]{article}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
 \usepackage{graphicx}
@@ -24,14 +24,14 @@
 \tableofcontents
 \newpage
 \section{Introduzione}
-Librery è un'applicazione Android completamente libera ed open source volta alla gestione delle proprie letture. Essa permette di effettuare ricerche nel più grande indice di testi integrali esistente tramite le API RESTful di Google Libri e di salvare localmente i dati relativi ai libri letti o che s'intende leggere. L'utente può aggiungere delle annotazioni e la propria valutazione ai libri letti e, grazie ad un servizio web anch'esso realizzato nell'ambito del progetto Librery, collaborare al mantenimento di uno proprio "scaffale" pubblico online volto a condividere con altri bibliofili i propri libri preferiti.
+Librery è un'applicazione Android completamente open source volta alla gestione delle proprie letture. Essa permette di effettuare ricerche nel più grande indice di testi integrali esistente, Google Libri, e salvare localmente i dati relativi ai libri letti o che s'intende leggere così ottenuti. L'utente può aggiungere delle annotazioni e la propria valutazione ai libri letti e, grazie ad un servizio web anch'esso realizzato nell'ambito del progetto Librery, consigliare i propri libri preferiti pubblicando in internet le proprie osservazioni al riguardo.
 	\subsection{Casi d'uso}
-	Tutte le sopra citate funzionalità - ed altre - sono presenti in Google Libri, che è ormai non solo un motore di ricerca specializzato, ma un servizio web complesso e articolato, collegato agli account Google dei propri utenti e disponibile anche come app Android. \newline
-	Librery, che effettua solamente richieste di dati pubblici a Google Libri e che dunque non necessita affatto di un account, vuole proporsi come una più semplice ma valida alternativa per quanti preferiscono avere la possibilità di mantenere un certo grado di riservatezza sui propri dati personali, eventualmente indicando in modo esplicito quali informazioni vadano rese pubbliche, sotto forma di consigli di lettura, sul sito web \url{anonimalettori.altervista.org}.
+	Tutte le funzionalità sopra citate - ed altre - sono presenti nell'app Android ufficiale di Google Libri, diventato negli ultimi anni un servizio web assai più articolato di un mero motore di ricerca specializzato. L'uso di Google Libri su Android, tuttavia, è legato in tutto e per tutto all'account Google dell'utente. Librery, che effettua solamente richieste di dati pubblici a Google Libri e non necessita di alcun account, vuole proporsi come una più semplice ma valida alternativa per quanti preferiscono avere la possibilità di mantenere un certo grado di riservatezza sui propri dati personali, eventualmente indicando in modo esplicito quali informazioni vadano rese pubbliche sotto forma di consigli di lettura visibili agli altri utenti dell'applicazione.
 \newpage
 \section{Architettura}
-La particolarità dell'architettura di Librery è che il dispositivo Android è client di due diversi server, uno di Google, al quale vengono effettuate le richieste JSON nel momento in cui si fa una ricerca, l'altro realizzato nell'ambito del progetto Librery e hostato su Altervista, volto a gestire i dati pubblici inviati dagli utenti.
-\image[diagram.png][scale=0.7]{Architettura del progetto Librery}
+La particolarità dell'architettura di Librery è che il dispositivo Android è client di due diversi server: uno di Google, al quale vengono effettuate le richieste JSON nel momento in cui si fa una ricerca, l'altro realizzato nell'ambito del progetto Librery e hostato su Altervista, volto a gestire i dati pubblici inviati dagli utenti.
+\image[diagram.png][scale=0.7]{Architettura del progetto Librery.}
+\ \\
 Nelle sezioni successive verranno descritti approfonditamente il client ed il server realizzato appositamente per questo progetto.
 \newpage
 \section{Il client: l'app Android}
@@ -39,23 +39,36 @@ In questa sezione si è scelto di concentrare l'attenzione sugli aspetti del cli
 	\subsection{Visione d'insieme}
 	Per la realizzazione dell'applicativo si è scelto il linguaggio Kotlin, totalmente interoperabile con Java e ormai ufficialmente supportato nel mondo Android, anche all'interno di Android Studio. La scelta è dovuta alle possibilità che Kotlin offre in termini di compattezza e leggibilità del codice ed ha permesso di sviluppare l'applicazione in tempi relativamente brevi.\newline
 	Il database locale è realizzato non direttamente in SQLite ma, come raccomandato nella più recente documentazione ufficiale di Android, mediante la libreria Room Persistence.
-	A livello di interfaccia utente, l'app è composta da cinque activity:
+	A livello di interfaccia utente, l'app è composta da sei activity:
 	\begin{enumerate}
 		\item \code{MainActivity}: schermata composta di due \code{Fragment} in cui è possibile visualizzare, all'interno di una \code{RecyclerView}, l'elenco dei libri letti e quello dei libri da leggere, ossia i risultati di due diverse interrogazioni al database locale, eseguite ogniqualvolta la schermata ritorna attiva;
 		\item \code{SearchActivity}: schermata tramite la quale l'utente può effettuare ricerche in Google Libri. Il risultato è una stringa in formato JSON che, per semplificare la comunicazione tra le activity, viene passata come tale a \code{SearchResultsActivity};
-		\item \code{SearchResultsActivity}: qui avviene il parsing del JSON ottenuto in risposta dai server di Google Books ed i risultati vengono visualizzati in una \code{RecyclerView}, a livello di layout, a quelle impiegate in \code{MainActiviy};
+		\item \code{SearchResultsActivity}: qui avviene il parsing del JSON ottenuto in risposta dai server di Google Books ed i risultati vengono visualizzati in una \code{RecyclerView} del tutto analoga, a livello di layout, a quelle impiegate in \code{MainActiviy};
+		\item \code{RecommendationsActivity}: rende accessibile all'utente la lista dei consigli di lettura. I dati sono recuperati in parte da un database (\code{my\_anonimalettori}) hostato su Altervista, in parte da Google Libri;
 		\item \code{ViewBookDetailsActivity}: permette di visualizzare i dettagli di un libro selezionato da una \code{RecyclerView}, modificarne alcuni attributi, ad esempio la valutazione, e salvarli localmente. Tramite un \code{Button} evidenziato in rosso è possibile inoltre accedere all'activity volta alla condivisione del libro online;
-		\item \code{ShareActivity}: permette di pubblicare in forma anonima le informazioni relative ad un libro. In particolare, presenta una \code{RatingBar} ed una \code{EditText}, contenenti per default la valutazione e la recensione provenienti da \code{ViewBookDetailsActivity}. I campi sono modificabili, in modo da permettere all'utente di differenziare dati pubblici e dati privati a piacimento.
-		\image[acts.png][scale=0.066]{Activity dell'app Android}
+		\item \code{ShareActivity}: permette di pubblicare in forma anonima le informazioni relative ad un libro. In particolare, presenta una \code{RatingBar} ed una \code{EditText}, contenenti per default la valutazione e la recensione provenienti da \code{ViewBookDetailsActivity}. Tali campi sono modificabili, in modo da permettere all'utente di differenziare dati pubblici e dati privati a piacimento.
 	\end{enumerate}
 	% room persistence database
-	\subsection{Utilizzo delle API di Google Books}
-	
-	\subsection{Librerie}
-		\subsubsection{OkHTTP}
-		\subsubsection{Gson}
-		\subsubsection{Picasso}
+	\subsection{Aspetti di networking}
+	Poiché Google Libri mette a disposizione delle API REST che restituiscono oggetti JSON, è sembrato opportuno, ai fini del riutilizzo di codice, basare tutte le comunicazioni tra i client e i due server sullo scambio di JSON, per il parsing del quale ci si è serviti della libreria open source \textbf{Gson} di Google. Per quel che riguarda il networking, si sono rivelate particolarmente utili anche altre due librerie di terze parti:
+	\begin{itemize}
+		\item \textbf{OkHttp}, un client HTTP efficiente e di facile utilizzo;
+		\item \textbf{Picasso} per il caricamento delle immagini.
+	\end{itemize} 
+	Più in particolare, il form in \code{SearchActivity} permette all'utente di specificare i parametri di una chiamata \code{GET} in forma \code{https://www.googleapis.com\\/books/v1/volumes/?\textit{parametri utente}\&projection=lite}. Si noti che il parametro \code{projection=lite} è utile per scaricare solamente i dati essenziali di un libro, ignorandone, ad esempio, l'anteprima, che rallenterebbe di molto lo scaricamento dei dati. Come accennato, la stringa JSON viene passata così com'è a \code{SearchResultsActivity}, dove avviene il parsing.
+	\image[search.png][scale=0.6]{Le attività relative alla ricerca in Google Libri.}
+	\ \\ \code{ShareActivity}, accessibile da \code{ViewBookDetailsActivity} per mezzo di un bottone, permette invece di pubblicare un consiglio di lettura eseguendo una chiamata \code{POST} all'indirizzo \url{http://anonimalettori.altervista.org/db/insert.php}. La risposta, chiaramente in JSON, serve al client per avere conferma dell'avvenuto inserimento dei dati nel database remoto.
+	\bigskip \\ Infine, \code{RecommendationsActivity}, accessibile tramite il menu principale dell'applicazione, permette all'utente di accedere alla lista dei consigli di lettura pubblicati, ordinati cronologicamente. Per come è strutturato il database dei consigli -si veda a tal proposito la sezione successiva- i dati relativi ai libri (titolo, autore, editore etc.) vengono recuperati anche in questo caso da Google Libri, specificando però un unico parametro: l'identificatore, che proviene dai risultati dell'interrogazione del database \code{my\_anonimalettori}.
+	\image[recomm.png][scale=0.15]{Le attività relative al recupero dei consigli di lettura.}
 \newpage
-\section{Il server per la condivisione online del proprio scaffale}
+\section{Il server per la condivisione dei consigli}
+Lato server sono stati realizzati un database MySQL e alcuni script PHP per la sua gestione. Lo schema della base di dati è volutamente minimale: esso contiene infatti soltanto i dati relativi ai consigli e gli id Google Books dei libri a cui si riferiscono, tramite i quali è possibile accedere a qualsiasi informazione sui libri stessi mediante una chiamata HTTP \code{GET} a Google Libri. Questo è esattamente quel che accade nel momento in cui il client richiede la lista dei consigli di lettura: per ogni elemento ricevuto in risposta da Librery Online, effettua una richiesta a Google.
+\image[struct.png][scale=0.2]{Struttura del database \code{my\_anonimalettori}}
+\ \\ Due script PHP, più uno esclusivamente relativo alla connessione al database di cui sopra, fungono da intermediari tra quest'ultimo e il client:
+\begin{itemize}
+	\item \code{select\_all.php} per le operazioni di \code{SELECT};
+	\item \code{insert.php} per gli inserimenti. In questo file è sembrato opportuno utilizzare i prepared statement per evitare SQL injection, considerando anche che la condivisione di consigli non prevede alcun tipo di login, la cui realizzazione sarebbe stata sia superflua che rischiosa.
+\end{itemize}
+Entrambi gli script rispondono al client in JSON, esattamente come le API di Google Libri. La risposta contiene sempre, oltre agli eventuali altri dati di interesse, un campo \code{success} che può assumere valore \code{0} (in caso di errore) o \code{1} (in caso di successo), volto ad informare il client nel caso in cui l'operazione richiesta non possa essere portata a termine.
 
 \end{document}
