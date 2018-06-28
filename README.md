@@ -11,4 +11,4 @@ This is my final project for two of my Bachelor's degree courses (_Programmazion
 - Run, study, share and redistribute the code... cause it's free software!
 
 ## Documentation
-This project is somewhat documented, but at the moment the documentation is not exhaustive in Italian, as it was written in order to pass the _Sistemi aperti e distribuiti_ course in my local uni and just focuses on the networking aspects. Still, you can download in pdf format since release 2.0.
+This project is somewhat documented, but at the moment the documentation is not exhaustive and in Italian, as it was written in order to pass the _Sistemi aperti e distribuiti_ course in my local uni and just focuses on the networking aspects. Still, you can download in pdf format since release 2.0.
