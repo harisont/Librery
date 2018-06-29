@@ -1,5 +1,4 @@
-# Librery
-<h1 align=center>
+<h1 align=left>
 <img src="LibreryDocs/Logo/horizontal.png" width=50%>
 </h1>
 
@@ -11,6 +10,7 @@ This is my final project for two of my Bachelor's degree courses (_Programmazion
 - Save book data locally
 - Add notes and rating to each book in your library
 - Share your thoughts about books you're reading with other users (in a very basic way)
+- Enjoy the beautiful Librery logo kindly designed by [Zularizal](https://github.com/zularizal) ;)
 - Run, study, share and redistribute the code... cause it's free software!
 
 ## Documentation
