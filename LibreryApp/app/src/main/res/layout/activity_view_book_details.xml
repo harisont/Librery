@@ -25,7 +25,7 @@
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/cover_desc"
-                android:src="@drawable/sample_cover" />
+                android:src="@drawable/new_sample_cover" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

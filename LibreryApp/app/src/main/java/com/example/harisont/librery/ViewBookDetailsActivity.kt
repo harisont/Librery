@@ -47,7 +47,7 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                 println("Image path is probably empty. A placeholder will be used instead.")
             }
         }
-        else book_cover.setImageResource(R.drawable.sample_cover)
+        else book_cover.setImageResource(R.drawable.new_sample_cover)
         notes.setText(notesStr, TextView.BufferType.EDITABLE)
         read_chbox.isChecked = read
         rating_bar.rating = rating

@@ -64,7 +64,7 @@ class RecyclerViewAdapter(private val bookList: List<Any>): RecyclerView.Adapter
         }
         holder.v.title?.text = title
         holder.v.author?.text = authors
-        holder.v.cover?.setImageResource(R.drawable.sample_cover)
+        holder.v.cover?.setImageResource(R.drawable.new_sample_cover)
     }
 }
 

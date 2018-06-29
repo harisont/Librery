@@ -10,7 +10,7 @@
         android:id="@+id/cover"
         android:layout_width="40dp"
         android:layout_height="match_parent"
-        android:src="@drawable/sample_cover" />
+        android:src="@drawable/new_sample_cover" />
 
     <LinearLayout
         android:padding="@dimen/recycler_view_padding"
