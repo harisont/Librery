@@ -81,7 +81,7 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                     runOnUiThread {
                         Toast.makeText(this, R.string.deleted, Toast.LENGTH_LONG).show()
                     }
-                    finish()
+                    finish()    // ugly way to go back without setting parent activity, which varies
                 }
                 else {
                     runOnUiThread {
