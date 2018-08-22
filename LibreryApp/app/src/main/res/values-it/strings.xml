@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Librery</string>
+    <string name="tab_text_0">Letti</string>
+    <string name="tab_text_1">Da leggere</string>
+    <string name="action_settings">Backup e ripristino</string>
+    <string name="book_title">Titolo: </string>
+    <string name="book_author">Autore: </string>
+    <string name="search">Ricerca avanzata</string>
+    <string name="share">Condividi qualcosa su questo libro...</string>
+    <string name="hint_isbn">ISBN</string>
+    <string name="cover_desc">Immagine di copertina</string>
+
+    <!--buttons-->
+    <string name="search_butt">Cerca</string>
+    <string name="post_butt">Pubblica</string>
+    <string name="save_button">Salva nel database locale</string>
+    <string name="del_button">Rimuovi dal database locale</string>
+    <string name="pub_button">Condividi online</string>
+
+    <!--toasts-->
+    <string name="fill_fields_toast">Per favore, inserisci almeno un parametro di ricerca!</string>
+    <string name="query_failure">Nessun dato è stato scaricato.</string>
+    <string name="not_connected">Controlla la tua connessione a internet.</string>
+    <string name="no_matching_data">Nessun riscontro.</string>
+    <string name="not_in_db">Il libro non è nel databse locale.</string>
+    <string name="deleted">Il libro è stato rimosso dal database locale.</string>
+    <string name="added">Le modifiche sono state salvate.</string>
+    <string name="post_failure">Spiacente, qualcosa è andato storto.</string>
+    <string name="posted">Post pubblicato!</string>
+
+    <!--hints-->
+    <string name="hint_title">Titolo</string>
+    <string name="hint_author">Autore</string>
+    <string name="hint_publisher">Editore</string>
+    <string name="notes_hint">Recensione e/o appunti</string>
+    <string name="comment_hint">Il tuo commento pubblico</string>
+
+    <!--activity labels-->
+    <string name="search_label">Ricerca</string>
+    <string name="search_res_label">Risultati</string>
+    <string name="book_details_label">Dettagli</string>
+    <string name="share_label">Condividi</string>
+    <string name="rec_label">Libri consigliati</string>
+
+</resources>

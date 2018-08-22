@@ -40,14 +40,14 @@ class ViewBookDetailsActivity : AppCompatActivity() {
         book_author.text = authors
         book_publisher.text = publisher
         book_year.text = publishedDate
-        if (thumbnailURL != "") {
+        book_cover.setImageResource(R.drawable.new_sample_cover)
+        if (thumbnailURL != "" && CheckNetworkStatus.isNetworkAvailable(this)) {
             try {
                 Picasso.get().load(thumbnailURL).into(book_cover)
             } catch (e: IllegalArgumentException) {
                 println("Image path is probably empty. A placeholder will be used instead.")
             }
         }
-        else book_cover.setImageResource(R.drawable.new_sample_cover)
         notes.setText(notesStr, TextView.BufferType.EDITABLE)
         read_chbox.isChecked = read
         rating_bar.rating = rating
@@ -81,6 +81,7 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                     runOnUiThread {
                         Toast.makeText(this, R.string.deleted, Toast.LENGTH_LONG).show()
                     }
+                    finish()    // ugly way to go back without setting parent activity, which varies
                 }
                 else {
                     runOnUiThread {

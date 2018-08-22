@@ -2,7 +2,7 @@
     <string name="app_name">Librery</string>
     <string name="tab_text_0">Have read</string>
     <string name="tab_text_1">To read</string>
-    <string name="action_settings">Recommended books</string>
+    <string name="action_settings">Backup and restore</string>
     <string name="book_title">Title: </string>
     <string name="book_author">Author: </string>
     <string name="search">Advanced search</string>

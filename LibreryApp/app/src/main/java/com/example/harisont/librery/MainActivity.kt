@@ -18,6 +18,7 @@ import com.example.harisont.librery.db.AppDB
 
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
+import java.io.File
 import java.io.IOException
 import kotlin.concurrent.thread
 
@@ -70,31 +71,11 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
-
         if (id == R.id.action_settings) {
-            if (CheckNetworkStatus.isNetworkAvailable(this)) {
-                val url = "http://anonimalettori.altervista.org/db/select_all.php"
-                val client = OkHttpClient()
-                val req = Request.Builder().url(url).build()
-                thread {
-                    client.newCall(req).enqueue(object : Callback {  // cannot use .execute() in the UI thread
-                        override fun onResponse(call: Call?, response: Response?) {
-                            val json = response?.body()?.string()
-                            println("Works like a charm!")
-                            startActivity(Intent(this@MainActivity, RecommendationsActivity::class.java)
-                                    .putExtra("res", json))     // search results are sent to the new activity as JSON
-                        }
-
-                        override fun onFailure(call: Call?, e: IOException?) {
-                            println("Epic fail!")
-                            runOnUiThread {
-                                Toast.makeText(this@MainActivity, getString(R.string.query_failure), Toast.LENGTH_LONG).show()
-                            }
-                        }
-                    })
-                }
-            } else Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_LONG).show()
-            return true
+            db?.close()
+            val dbFile = getDatabasePath("books.db").absolutePath
+            Toast.makeText(this, "Temporary unavailable", Toast.LENGTH_LONG).show()
+            // TODO: backup somewhere & restore
         }
         return super.onOptionsItemSelected(item)
     }
