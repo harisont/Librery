@@ -73,8 +73,8 @@ class MainActivity : AppCompatActivity() {
         val id = item.itemId
         if (id == R.id.action_settings) {
             db?.close()
-            val dbFile = getDatabasePath("books.db")
-            println("PATH: $dbFile")
+            val dbFile = getDatabasePath("books.db").absolutePath
+            Toast.makeText(this, "Temporary unavailable.").show()
             // TODO: backup somewhere & restore
         }
         return super.onOptionsItemSelected(item)
