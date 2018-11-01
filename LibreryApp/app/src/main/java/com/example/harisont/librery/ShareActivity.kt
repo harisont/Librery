@@ -19,52 +19,20 @@ class ShareActivity : AppCompatActivity() {
         setContentView(R.layout.activity_share)
 
         val extras = intent.extras
-        val id = extras.getString("id")
-        val defRating = extras.getFloat("def_rating")
-        val defNotes = extras.getString("def_notes")
+        val title = extras.getString("title")
+        val authors = extras.getString("authors")
+        val defReason = extras.getString("reason")
 
-        pub_rating_bar.rating = defRating
-        pub_notes.setText(defNotes, TextView.BufferType.EDITABLE)
-
-        val url = "http://anonimalettori.altervista.org/db/insert.php"
+        pub_notes.setText(defReason, TextView.BufferType.EDITABLE)
 
         post_button.setOnClickListener {
-            val formBody = FormBody.Builder()
-                    .add("libro", id)
-                    .add("commento", pub_notes.text.toString())
-                    .add("valutazione", pub_rating_bar.rating.toString())
-                    .build()
-            val client = OkHttpClient()
-            val request = Request.Builder()
-                    .url(url)
-                    .post(formBody)
-                    .build()
-            if (CheckNetworkStatus.isNetworkAvailable(this)) {
-                thread {
-                    client.newCall(request).enqueue(object : Callback {
-                        override fun onResponse(call: Call?, response: Response?) {
-                            val json = response?.body()?.string()
-                            println("Works like a charm!")
-                            val gson = GsonBuilder().create()
-                            val parsedJson = gson.fromJson(json, InsertResponse::class.java)
-                            if(parsedJson.success==1)
-                                runOnUiThread {
-                                    Toast.makeText(this@ShareActivity, getString(R.string.posted),Toast.LENGTH_LONG).show()
-                                }
-                            else runOnUiThread {
-                                Toast.makeText(this@ShareActivity, getString(R.string.post_failure), Toast.LENGTH_LONG).show()
-                            }
-                        }
-
-                        override fun onFailure(call: Call?, e: IOException?) {
-                            println("Epic fail!")
-                            runOnUiThread {
-                                Toast.makeText(this@ShareActivity, getString(R.string.post_failure), Toast.LENGTH_LONG).show()
-                            }
-                        }
-                    })
-                }
-            } else Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_LONG).show()
+            val message = getString(R.string.message1) + title + getString(R.string.message2) + authors + getString(R.string.message3) + pub_notes.text
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, message)
+                type = "text/plain"
+            }
+            startActivity(sendIntent)
         }
     }
 }

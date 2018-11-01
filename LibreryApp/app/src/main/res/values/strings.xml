@@ -6,7 +6,7 @@
     <string name="book_title">Title: </string>
     <string name="book_author">Author: </string>
     <string name="search">Advanced search</string>
-    <string name="share">Share something about this book...</string>
+    <string name="share">Recommend this book to a friend...</string>
     <string name="hint_isbn">ISBN</string>
     <string name="cover_desc">Cover image</string>
 
@@ -15,7 +15,8 @@
     <string name="post_butt">Post</string>
     <string name="save_button">Save to local db</string>
     <string name="del_button">Remove from local db</string>
-    <string name="pub_button">Share online</string>
+    <string name="pub_button">Share</string>
+    <string name="sh_button">Share</string>
 
     <!--toasts-->
     <string name="fill_fields_toast">Please fill in at least one of the fields!</string>
@@ -41,5 +42,10 @@
     <string name="book_details_label">Book details</string>
     <string name="share_label">Share</string>
     <string name="rec_label">Recommended books</string>
+
+    <!--message-->
+    <string name="message1">I recommend you to read </string>
+    <string name="message2"> by </string>
+    <string name="message3"> because </string>
 
 </resources>

@@ -6,7 +6,7 @@
     <string name="book_title">Titolo: </string>
     <string name="book_author">Autore: </string>
     <string name="search">Ricerca avanzata</string>
-    <string name="share">Condividi qualcosa su questo libro...</string>
+    <string name="share">Suggerisci questo libro ad un amico...</string>
     <string name="hint_isbn">ISBN</string>
     <string name="cover_desc">Immagine di copertina</string>
 
@@ -15,7 +15,9 @@
     <string name="post_butt">Pubblica</string>
     <string name="save_button">Salva nel database locale</string>
     <string name="del_button">Rimuovi dal database locale</string>
-    <string name="pub_button">Condividi online</string>
+    <string name="pub_button">Condividi</string>
+    <string name="sh_button">Condividi</string>
+
 
     <!--toasts-->
     <string name="fill_fields_toast">Per favore, inserisci almeno un parametro di ricerca!</string>
@@ -41,5 +43,10 @@
     <string name="book_details_label">Dettagli</string>
     <string name="share_label">Condividi</string>
     <string name="rec_label">Libri consigliati</string>
+
+    <!--message-->
+    <string name="message1">Ti consiglio di leggere </string>
+    <string name="message2"> di </string>
+    <string name="message3"> perché </string>
 
 </resources>
