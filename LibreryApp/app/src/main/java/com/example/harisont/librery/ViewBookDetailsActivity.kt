@@ -97,7 +97,7 @@ class ViewBookDetailsActivity : AppCompatActivity() {
             val i = Intent(this, ShareActivity::class.java)
             val e = Bundle()
             e.putString("title", title)
-            e.putString("author", authors)
+            e.putString("authors", authors)
             e.putString("reason", notes.text.toString())
             startActivity(i.putExtras(e))
         }
