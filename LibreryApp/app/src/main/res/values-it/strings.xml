@@ -29,6 +29,7 @@
     <string name="added">Le modifiche sono state salvate.</string>
     <string name="post_failure">Spiacente, qualcosa è andato storto.</string>
     <string name="posted">Post pubblicato!</string>
+    <string name="unavailable">Questa funzione non è ancora disponibile.</string>
 
     <!--hints-->
     <string name="hint_title">Titolo</string>

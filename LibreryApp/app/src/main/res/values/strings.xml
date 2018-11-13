@@ -28,6 +28,7 @@
     <string name="added">Your changes have been saved.</string>
     <string name="post_failure">Sorry, something\'s wrong.</string>
     <string name="posted">Posted successfully!</string>
+    <string name="unavailable">This functionality is not available yet.</string>
 
     <!--hints-->
     <string name="hint_title">Title</string>

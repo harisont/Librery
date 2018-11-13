@@ -74,7 +74,8 @@ class MainActivity : AppCompatActivity() {
         if (id == R.id.action_settings) {
             db?.close()
             val dbFile = getDatabasePath("books.db").absolutePath
-            Toast.makeText(this, "Temporary unavailable", Toast.LENGTH_LONG).show()
+
+            Toast.makeText(this, R.string.unavailable, Toast.LENGTH_LONG).show()
             // TODO: backup somewhere & restore
         }
         return super.onOptionsItemSelected(item)
