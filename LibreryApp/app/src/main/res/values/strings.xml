@@ -12,7 +12,7 @@
 
     <!--buttons-->
     <string name="search_butt">Search</string>
-    <string name="post_butt">Post</string>
+    <string name="post_butt">Recommend</string>
     <string name="save_button">Save to local db</string>
     <string name="del_button">Remove from local db</string>
     <string name="pub_button">Share</string>
