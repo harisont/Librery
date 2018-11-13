@@ -10,6 +10,7 @@ import kotlin.concurrent.thread
 import android.widget.TextView
 import com.example.harisont.librery.db.AppDB
 import com.example.harisont.librery.db.BookEntity
+import kotlinx.android.synthetic.main.row.*
 
 
 class ViewBookDetailsActivity : AppCompatActivity() {
@@ -92,16 +93,13 @@ class ViewBookDetailsActivity : AppCompatActivity() {
             }
         }
 
-        pub_button.setOnClickListener {
-            if (CheckNetworkStatus.isNetworkAvailable(this)) {
-                val i = Intent(this, ShareActivity::class.java)
-                val e = Bundle()
-                e.putString("id", id)
-                e.putFloat("def_rating", rating_bar.rating)
-                e.putString("def_notes", notes.text.toString())
-                startActivity(i.putExtras(e))
-            }
-            else Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_LONG).show()
+        sh_button.setOnClickListener {
+            val i = Intent(this, ShareActivity::class.java)
+            val e = Bundle()
+            e.putString("title", title)
+            e.putString("authors", authors)
+            e.putString("reason", notes.text.toString())
+            startActivity(i.putExtras(e))
         }
     }
 }

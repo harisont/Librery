@@ -106,13 +106,11 @@
                 android:text="@string/del_button"/>
 
             <Button
-                android:visibility="gone"
-                android:enabled="false"
-                android:id="@+id/pub_button"
+                android:id="@+id/sh_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
-                android:text="@string/pub_button" />
+                android:text="@string/sh_button" />
 
         </LinearLayout>
 
