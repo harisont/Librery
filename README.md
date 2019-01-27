@@ -5,6 +5,13 @@
 A free Kotlin android app to manage books.
 This is my final project for two of my Bachelor's degree courses (_Programmazione 3_ and _Sistemi aperti e distribuiti_).
 
+It is now available on F-Droid, something I'm very happy about as I feel that Android is a pretty nice OS, but it seriously needs some more free software.
+
+[<img src="https://f-droid.org/badge/get-it-on.png"
+      alt="Get it on F-Droid"
+      height="80">](https://f-droid.org/en/packages/com.example.harisont.librery/)
+
+
 ## What you can do with Librery:
 - Advanced search in Google books (Google account not required)
 - Save book data locally
