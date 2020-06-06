@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Librery</string>
+    <string name="tab_text_0">Libros</string>
+    <string name="tab_text_1">Por leer</string>
+    <string name="action_settings">Respaldar y restaurar</string>
+    <string name="book_title">Título: </string>
+    <string name="book_author">Autor: </string>
+    <string name="search">Búsqueda avanzada</string>
+    <string name="share">Dile este libro a un amigo...</string>
+    <string name="hint_isbn">ISBN</string>
+    <string name="cover_desc">Imagen de portada</string>
+
+    <!--buttons-->
+    <string name="search_butt">Buscar</string>
+    <string name="post_butt">Recomendar</string>
+    <string name="save_button">Guardar en la base de datos local</string>
+    <string name="del_button">Quitar de la base de datos local</string>
+    <string name="pub_button">Compartir</string>
+    <string name="sh_button">Compartir</string>
+
+
+    <!--toasts-->
+    <string name="fill_fields_toast">¡Por favor, rellena al menos uno de los campos!</string>
+    <string name="query_failure">No se pudo obtener ningún dato.</string>
+    <string name="not_connected">Por favor, compruebe su conexión a la red.</string>
+    <string name="no_matching_data">No se encontraron.</string>
+    <string name="not_in_db">Este libro no está en la base de datos local.</string>
+    <string name="deleted">Este libro fue eliminado de sus bases de datos locales.</string>
+    <string name="added">Tus cambios han sido guardados.</string>
+    <string name="post_failure">Lo sentimos, algo salió mal.</string>
+    <string name="posted">¡Publicado con éxito!</string>
+    <string name="invailable">Esta funcionalidad no está disponible todavía.</string>
+
+    <!--hints-->
+    <string name="hint_title">Título</string>
+    <string name="hint_author">Autor</string>
+    <string name="hint_publisher">Editora</string>
+    <string name="notes_hint">Reseña o notas</string>
+    <string name="comment_hint">Publicar comentario</string>
+
+    <!--activity labels-->
+    <string name="search_label">Buscar</string>
+    <string name="search_res_label">Buscar resultados</string>
+    <string name="book_details_label">Detalles</string>
+    <string name="share_label">Compartir</string>
+    <string name="rec_label">Libros recomendados</string>
+
+    <!--message-->
+    <string name="message1">Recomendamos para leer </string>
+    <string name="message2"> por </string>
+    <string name="message3"> porque </string>
+
+</resources>
