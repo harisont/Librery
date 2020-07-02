@@ -3,6 +3,7 @@ package com.example.harisont.librery
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_view_book_details.*
@@ -78,12 +79,20 @@ class ViewBookDetailsActivity : AppCompatActivity() {
             thread {
                 val toBeDeleted = db?.bookDAO()?.selectBook(id)
                 if (toBeDeleted != null) {
-                    // TODO: add dialog
-                    db?.bookDAO()?.deleteBookData(toBeDeleted)
                     runOnUiThread {
-                        Toast.makeText(this, R.string.deleted, Toast.LENGTH_LONG).show()
+                        AlertDialog.Builder(this)
+                                .setTitle(R.string.safe_del_title)
+                                .setMessage(R.string.safe_del_question)
+                                .setPositiveButton(R.string.yes) { _, _ ->
+                                    thread { db?.bookDAO()?.deleteBookData(toBeDeleted) }
+                                    runOnUiThread {
+                                        Toast.makeText(this, R.string.deleted, Toast.LENGTH_LONG).show()
+                                        finish()    // ugly way to go back without setting parent activity, which varies
+                                    }
+                                }
+                                .setNegativeButton(R.string.no, null)
+                                .show()
                     }
-                    finish()    // ugly way to go back without setting parent activity, which varies
                 }
                 else {
                     runOnUiThread {

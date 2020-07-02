@@ -49,4 +49,9 @@
     <string name="message2"> by </string>
     <string name="message3"> because </string>
 
+    <!--dialogs-->
+    <string name="safe_del_title">Removing book</string>
+    <string name="safe_del_question">Are you sure you want to remove this item?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

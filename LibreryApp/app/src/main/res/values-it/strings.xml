@@ -50,4 +50,9 @@
     <string name="message2">\ di\ </string>
     <string name="message3">\ perché\ </string>
 
+    <!--dialogs-->
+    <string name="safe_del_title">Rimozione libro</string>
+    <string name="safe_del_question">Sei sicuro di voler rimuovere questo elemento?</string>
+    <string name="yes">Sì</string>
+    <string name="no">No</string>
 </resources>
