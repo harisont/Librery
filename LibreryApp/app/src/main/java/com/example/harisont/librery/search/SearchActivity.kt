@@ -1,9 +1,11 @@
-package com.example.harisont.librery
+package com.example.harisont.librery.search
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.harisont.librery.utils.CheckNetworkStatus
+import com.example.harisont.librery.R
 import kotlinx.android.synthetic.main.activity_search.*
 import okhttp3.*
 import java.io.IOException

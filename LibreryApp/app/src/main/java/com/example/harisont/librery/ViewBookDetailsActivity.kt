@@ -10,7 +10,8 @@ import kotlin.concurrent.thread
 import android.widget.TextView
 import com.example.harisont.librery.db.AppDB
 import com.example.harisont.librery.db.BookEntity
-import kotlinx.android.synthetic.main.row.*
+import com.example.harisont.librery.share.ShareActivity
+import com.example.harisont.librery.utils.CheckNetworkStatus
 
 
 class ViewBookDetailsActivity : AppCompatActivity() {

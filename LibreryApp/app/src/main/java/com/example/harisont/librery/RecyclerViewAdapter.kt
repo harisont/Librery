@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.harisont.librery.db.BookEntity
+import com.example.harisont.librery.utils.Book
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row.view.*
 

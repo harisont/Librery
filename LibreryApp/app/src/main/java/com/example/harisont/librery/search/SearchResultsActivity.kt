@@ -1,9 +1,12 @@
-package com.example.harisont.librery
+package com.example.harisont.librery.search
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
+import com.example.harisont.librery.R
+import com.example.harisont.librery.RecyclerViewAdapter
+import com.example.harisont.librery.utils.SearchResults
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_main.*
 

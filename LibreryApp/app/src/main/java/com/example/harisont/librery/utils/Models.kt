@@ -1,4 +1,4 @@
-package com.example.harisont.librery
+package com.example.harisont.librery.utils
 
 // CLASSES USED JUST TO PARSE JSON WITH GSON
 
@@ -11,13 +11,12 @@ class VolumeInfo(val title: String,
                  val authors: List<String>,
                  val publisher: String,
                  val publishedDate: String,
-                 val imageLinks:ImageLinks)
+                 val imageLinks: ImageLinks)
 
 class ImageLinks(val smallThumbnail: String)
 
 
 class InsertResponse(val success: Int)
-
 
 class Recommendations(val success: Int, val data: List<Recommendation>)
 

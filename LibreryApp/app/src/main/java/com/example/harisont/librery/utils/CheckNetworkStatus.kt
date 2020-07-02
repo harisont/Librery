@@ -1,4 +1,4 @@
-package com.example.harisont.librery
+package com.example.harisont.librery.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

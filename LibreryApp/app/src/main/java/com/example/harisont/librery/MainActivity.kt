@@ -8,19 +8,13 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import com.example.harisont.librery.search.SearchActivity
 import com.example.harisont.librery.db.AppDB
 
 import kotlinx.android.synthetic.main.activity_main.*
-import okhttp3.*
-import java.io.File
-import java.io.IOException
-import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 

@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SearchActivity"
+            android:name=".search.SearchActivity"
             android:label="@string/search_label"
             android:screenOrientation="portrait" />
         <activity
@@ -32,16 +32,13 @@
             android:label="@string/book_details_label"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SearchResultsActivity"
+            android:name=".search.SearchResultsActivity"
             android:label="@string/search_res_label"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ShareActivity"
+            android:name=".share.ShareActivity"
             android:label="@string/share_label"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".RecommendationsActivity"
-            android:label="@string/rec_label" />
     </application>
 
 </manifest>

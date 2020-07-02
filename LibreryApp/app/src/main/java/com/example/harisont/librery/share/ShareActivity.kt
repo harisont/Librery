@@ -1,15 +1,11 @@
-package com.example.harisont.librery
+package com.example.harisont.librery.share
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import android.widget.Toast
-import com.google.gson.GsonBuilder
+import com.example.harisont.librery.R
 import kotlinx.android.synthetic.main.activity_share.*
-import okhttp3.*
-import java.io.IOException
-import kotlin.concurrent.thread
 
 
 class ShareActivity : AppCompatActivity() {
