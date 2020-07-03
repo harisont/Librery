@@ -53,6 +53,8 @@
     <!--dialogs-->
     <string name="safe_del_title">Rimozione libro</string>
     <string name="safe_del_question">Sei sicuro di voler rimuovere questo elemento?</string>
+    <string name="safe_upd_title">Modifica dati libro</string>
+    <string name="safe_upd_question">Questo libro é già presente nel tuo database locale. Sei sicuro di volerlo modificare?</string>
     <string name="yes">Sì</string>
     <string name="no">No</string>
 </resources>

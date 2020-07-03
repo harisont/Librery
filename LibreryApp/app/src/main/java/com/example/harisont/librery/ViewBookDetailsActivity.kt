@@ -20,6 +20,14 @@ class ViewBookDetailsActivity : AppCompatActivity() {
     private var db: AppDB? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        fun updateBook(record: BookEntity) {
+            thread { db?.bookDAO()?.saveBookData(record) }
+            runOnUiThread {
+                Toast.makeText(this, R.string.added, Toast.LENGTH_LONG).show()
+                finish()    // ugly way to go back without setting parent activity, which varies
+            }
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_book_details)
 
@@ -67,11 +75,20 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                     rating_bar.rating,
                     notes.text.toString())
             thread {
-                db?.bookDAO()?.saveBookData(record)
-                runOnUiThread {
-                    Toast.makeText(this, R.string.added, Toast.LENGTH_LONG).show()
+                if (db?.bookDAO()?.selectBook(id) == null)
+                    updateBook(record)
+                else {
+                    runOnUiThread {
+                        AlertDialog.Builder(this)
+                                .setTitle(R.string.safe_upd_title)
+                                .setMessage(R.string.safe_upd_question)
+                                .setPositiveButton(R.string.yes) { _,_ ->
+                                    updateBook(record)
+                                }
+                                .setNegativeButton(R.string.no, null)
+                                .show()
+                    }
                 }
-                println("RECORD COUNT:"+db?.bookDAO()?.selectAll()?.size)
             }
         }
 
@@ -83,7 +100,7 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                         AlertDialog.Builder(this)
                                 .setTitle(R.string.safe_del_title)
                                 .setMessage(R.string.safe_del_question)
-                                .setPositiveButton(R.string.yes) { _, _ ->
+                                .setPositiveButton(R.string.yes) { _,_ ->
                                     thread { db?.bookDAO()?.deleteBookData(toBeDeleted) }
                                     runOnUiThread {
                                         Toast.makeText(this, R.string.deleted, Toast.LENGTH_LONG).show()
@@ -99,7 +116,6 @@ class ViewBookDetailsActivity : AppCompatActivity() {
                         Toast.makeText(this, R.string.not_in_db, Toast.LENGTH_LONG).show()
                     }
                 }
-                println("RECORD COUNT:" + db?.bookDAO()?.selectAll()?.size)
             }
         }
 

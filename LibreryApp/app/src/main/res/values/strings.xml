@@ -52,6 +52,8 @@
     <!--dialogs-->
     <string name="safe_del_title">Removing book</string>
     <string name="safe_del_question">Are you sure you want to remove this item?</string>
+    <string name="safe_upd_title">Updating book data</string>
+    <string name="safe_upd_question">This book is already in you local database. Are you sure you want to update it?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
 </resources>
