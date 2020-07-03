@@ -13,6 +13,7 @@ It is now available on F-Droid, something I'm very happy about as I feel that An
 
 
 ## What you can do with Librery:
+![screenshots](screens/all.jpg)
 - Advanced search in Google books (Google account not required)
 - Save book data locally
 - Add notes and rating to each book in your library
