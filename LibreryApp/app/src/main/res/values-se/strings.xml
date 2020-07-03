@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Librery</string>
+    <string name="tab_text_0">Lästa</string>
+    <string name="tab_text_1">Att läsa</string>
+    <string name="action_settings">Säkerhetskopiering och återställning</string>
+    <string name="book_title">Titel: </string>
+    <string name="book_author">Författare: </string>
+    <string name="search">Advancerad sökning</string>
+    <string name="share">Rekommendera denna bök till en kompis...</string>
+    <string name="hint_isbn">ISBN</string>
+    <string name="cover_desc">Omslagbild</string>
+
+    <!--buttons-->
+    <string name="search_butt">Sök</string>
+    <string name="post_butt">Rekommendera</string>
+    <string name="save_button">Spara i den lokala databasen</string>
+    <string name="del_button">Ta bort från den lokala databasen</string>
+    <string name="pub_button">Dela</string>
+    <string name="sh_button">Dela</string>
+
+
+    <!--toasts-->
+    <string name="fill_fields_toast">Vänligen fyll i minst ett av fälten!</string>
+    <string name="query_failure">Det gick inte att hämta data.</string>
+    <string name="not_connected">Vänligen kolla din nätverksanslutning.</string>
+    <string name="no_matching_data">Inga matchande data.</string>
+    <string name="not_in_db">Boken finns inte i den lokala databasen.</string>
+    <string name="deleted">Boken har tagits bort från den lokala databasen.</string>
+    <string name="added">Dina ändringar har sparats.</string>
+    <string name="post_failure">...Usch! Något gick fel!</string>
+    <string name="posted">Publicerat!</string>
+    <string name="unavailable">Denna funktion är inte tillgänglig ännu.</string>
+
+    <!--hints-->
+    <string name="hint_title">Titel</string>
+    <string name="hint_author">Författare</string>
+    <string name="hint_publisher">Bokförläggare</string>
+    <string name="notes_hint">Granskning och/eller anteckningar</string>
+    <string name="comment_hint">Din offentliga kommentar</string>
+
+    <!--activity labels-->
+    <string name="search_label">Ricerca</string>
+    <string name="search_res_label">Risultati</string>
+    <string name="book_details_label">Dettagli</string>
+    <string name="share_label">Condividi</string>
+    <string name="rec_label">Libri consigliati</string>
+
+    <!--message-->
+    <string name="message1">Jag rekommenderar dig\ </string>
+    <string name="message2">\ av\ </string>
+    <string name="message3">\ på grund av att\ </string>
+
+    <!--dialogs-->
+    <string name="safe_del_title">Ta bort boken</string>
+    <string name="safe_del_question">Är du säker på att du vill ta bort den här boken?</string>
+    <string name="safe_upd_title">Ändra bokens data </string>
+    <string name="safe_upd_question">Denna bok finns redan i din lokala databas. Är du säker på att du vill uppdatera den?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nej</string>
+</resources>
